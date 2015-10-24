@@ -1,4 +1,4 @@
-var http = require('http')
+var utils = require('./utils')
 var args = require('minimist')(process.argv, {
   alias:{
     p:'port',
@@ -10,9 +10,6 @@ var args = require('minimist')(process.argv, {
   }
 })
 
-var Server = require('./server')
-var server = http.createServer(Server(args))
-
-server.listen(args.port, function(){
+utils.bind_server(args, function(error, server){
   console.log('server listening on port: ' + args.port)
-})
+}))
