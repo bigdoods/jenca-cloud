@@ -9,7 +9,7 @@ function build_server(args){
 }
 
 function bind_server(args, done){
-  if(!args) done = args
+  if(arguments.length<=1) done = args
   var server = build_server(args)
   server.listen(args.port || 80, function(){
     done && done(null, server)
@@ -27,11 +27,25 @@ function json_get_request(url, done){
   })
 }
 
+function post_request(url, data, done){
+  var req = hyperquest.post(url)
+  req.pipe()
+}
+
+function json_post_request(url, data, done){
+  post_request(url, data, function(err, result){
+    if(err) return done(err)
+    done(null, JSON.parse(result))
+  })
+}
+
 module.exports = {
   build_server:build_server,
   bind_server:bind_server,
   request:{
     get:get_request,
-    json_get:json_get_request
+    post:post_request,
+    json_get:json_get_request,
+    json_post:json_post_request
   }
 }
