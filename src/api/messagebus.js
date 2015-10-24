@@ -7,11 +7,11 @@ module.exports = function(type, opts){
   var transport = Transport(type, opts)
 
   function publish(channel, data, done){
-    transport.publish(channel, data, done){
+    transport.publish(channel, data, done)
   }
 
-  function subscribe(channel, done){
-    transport.subscribe(channel, done){
+  function subscribe(channel, handler, done){
+    transport.subscribe(channel, handler, done)
   }
 
   return {
