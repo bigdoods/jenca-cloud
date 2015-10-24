@@ -1,5 +1,5 @@
 var drivers = {
-  jsonfile:require('./drivers/jsonfile')
+  jsonfile:require('./storage-drivers/jsonfile')
 }
 
 module.exports = function(type, opts){
