@@ -1,21 +1,9 @@
-var http = require('http')
 var hyperquest = require('hyperquest')
 var concat = require('concat-stream');
-var Server = require('./server')
+var uuid = require('uuid');
 
-
-function build_server(args){
-  var server = Server(args)
-  server.http = http.createServer(server)
-  return server
-}
-
-function bind_server(args, done){
-  if(arguments.length<=1) done = args
-  var server = build_server(args)
-  server.http.listen(args.port || 80, function(){
-    done && done(null, server)
-  })
+function tempfile(){
+  return '/tmp/' + uuid.v1()
 }
 
 function get_request(url, done){
@@ -36,19 +24,26 @@ function post_request(url, data, done){
   req.pipe(concat(function(result){
     done(null, result.toString())
   }))
-  req.end(data)
+  req.end(data.toString())
 }
 
 function json_post_request(url, data, done){
-  post_request(url, data, function(err, result){
+  post_request(url, JSON.stringify(data), function(err, result){
     if(err) return done(err)
     done(null, JSON.parse(result))
   })
 }
 
+// read the JSON body from an incoming HTTP request
+function slurp_json(req, done){
+  req.pipe(concat(function(data){
+    done(null, JSON.parse(data.toString()))
+  }))
+}
+
 module.exports = {
-  build_server:build_server,
-  bind_server:bind_server,
+  slurp_json:slurp_json,
+  tempfile:tempfile,
   request:{
     get:get_request,
     post:post_request,

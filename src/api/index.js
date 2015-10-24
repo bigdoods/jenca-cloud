@@ -1,11 +1,13 @@
-var utils = require('./utils')
+var utils = require('./server-utils')
 var args = require('minimist')(process.argv, {
   alias:{
     p:'port',
-    d:'datafile'
+    d:'datafile',
+    s:'storage'
   },
   default:{
     port:80,
+    storage:process.env.STORAGE || 'jsonfile',
     datafile:process.env.DATA_FILE || '/data/file.json'
   }
 })

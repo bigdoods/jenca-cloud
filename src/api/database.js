@@ -1,32 +1,36 @@
-function create_project(data, done){
+var Storage = require('./storage')
 
-}
+module.exports = function(type, opts){
 
-function view_project(id, done){
+  if(!type) type = 'jsonfile'
+    
+  var storage = Storage(type, opts)
 
-}
+  function create_project(userid, data, done){
+    storage.create_project(userid, data, done)
+  }
 
-function list_projects(done){
+  function get_project(userid, projectid, done){
+    storage.get_project(userid, projectid, done)
+  }
 
-}
+  function list_projects(userid, done){
+    storage.list_projects(userid, done)
+  }
 
-function delete_project(id, done){
+  function delete_project(userid, projectid, done){
+    storage.delete_project(userid, projectid, done)
+  }
 
-}
+  function save_project(userid, projectid, data, done){
+    storage.save_project(userid, projectid, data, done)
+  }
 
-function save_project(id, data, done){
-
-}
-
-function list_images(done){
-
-}
-
-module.exports = {
-  create_project:create_project,
-  view_project:view_project,
-  list_projects:list_projects,
-  delete_project:delete_project,
-  save_project:save_project,
-  list_images:list_images
+  return {
+    create_project:create_project,
+    get_project:get_project,
+    list_projects:list_projects,
+    delete_project:delete_project,
+    save_project:save_project
+  }
 }
