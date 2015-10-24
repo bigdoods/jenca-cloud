@@ -1,5 +1,7 @@
 api:
   image: jencacloud/api:1.0.0
+  ports:
+    - "80:80"
   environment:
     - "DATA_FILE=/data/file.json"
     - "STORAGE_DRIVER=json"

@@ -1,4 +1,4 @@
-.PHONY: test apitest build apishell
+.PHONY: test apitest build apishell run
 
 build:
 	@docker build -t jencacloud/api:1.0.0 src/api
@@ -19,3 +19,11 @@ apishell:
 		jencacloud/api:1.0.0
 
 test: apitest
+
+run: build
+	docker-compose up
+
+# this runs the docker-compose but mounts the web folder for
+# instant changes
+devrun: build
+	docker-compose -f development.yml up
