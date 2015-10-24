@@ -1,0 +1,9 @@
+api:
+  image: jencacloud/api:1.0.0
+  environment:
+    - "DATA_FILE=/data/file.json"
+    - "STORAGE_DRIVER=json"
+  volumes:
+    - '/tmp/jenca-api:/data'
+
+  
