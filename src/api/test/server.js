@@ -2,7 +2,7 @@ var tape = require('tape')
 var utils = require('../utils')
 var packagejson = require('../package.json')
 
-tape('server should be a function', function (t) {
+tape('server should GET /v1/version', function (t) {
 
   console.log('making a server')
 
