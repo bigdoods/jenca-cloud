@@ -9,6 +9,7 @@ var utils = require('./utils')
 var Database = require('./database')
 var Library = require('./library')
 var MessageBus = require('./messagebus')
+var ConsumerCollection = require('./consumercollection')
 
 var APIVERSION = 'v1'
 var USER_ID = 1
@@ -25,6 +26,11 @@ module.exports = function(opts){
   var database = Database(opts.storage, bus, opts)
   var library = Library(opts.library, bus, opts)
   var fileServer = ecstatic({ root: __dirname + '/web' })
+  var consumers = ConsumerCollection(opts)
+
+  consumers.listen(bus, function(){
+    console.log('consumers listening')
+  })
 
   router.addRoute(get_route('version'), {
     GET: function(req, res){

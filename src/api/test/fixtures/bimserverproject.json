@@ -1,0 +1,8 @@
+{
+    "name":"BIMServer",
+    "containers":[{
+        "name":"BIMServer",
+        "image":"bimscript/docker-bimserver",
+        "arguments":"apples"
+    }]
+}

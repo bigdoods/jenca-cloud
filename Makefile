@@ -39,3 +39,6 @@ developer: build
 # instant changes
 devrun: build
 	docker-compose -f development.yml up
+
+devcreate:
+	bash scripts/createproject.sh
