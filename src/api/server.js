@@ -18,6 +18,7 @@ module.exports = function(opts){
 
   var router = Router()
   var database = Database(opts.storage, opts)
+  var fileServer = ecstatic({ root: __dirname + '/web' })
 
   router.addRoute(get_route('version'), {
     GET: function(req, res){
@@ -55,6 +56,8 @@ module.exports = function(opts){
       })
     }
   })
+
+  router.addRoute("/*", fileServer)
 
   return router
 }
