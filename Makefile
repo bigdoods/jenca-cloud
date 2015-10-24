@@ -29,8 +29,11 @@ nodejs:
 	chmod a+x /usr/local/bin/nave
 	nave usemain 0.11.13
 
-install: build nodejs
-	cd ./src/api && npm install
+developer: build
+	@docker run -ti --rm \
+		--entrypoint "bash" \
+		-v $(PWD)/src/api:/srv/app \
+		jencacloud/api:1.0.0 -c "cd /srv/app && npm install"
 
 # this runs the docker-compose but mounts the web folder for
 # instant changes
