@@ -5,19 +5,23 @@ var Server = require('./server')
 
 
 function build_server(args){
-  return http.createServer(Server(args))
+  var server = Server(args)
+  server.http = http.createServer(server)
+  return server
 }
 
 function bind_server(args, done){
   if(arguments.length<=1) done = args
   var server = build_server(args)
-  server.listen(args.port || 80, function(){
+  server.http.listen(args.port || 80, function(){
     done && done(null, server)
   })
 }
 
 function get_request(url, done){
-  hyperquest(url).pipe(concat(done))
+  hyperquest(url).pipe(concat(function(result){
+    done(null, result.toString())
+  }))
 }
 
 function json_get_request(url, done){
@@ -29,7 +33,10 @@ function json_get_request(url, done){
 
 function post_request(url, data, done){
   var req = hyperquest.post(url)
-  req.pipe()
+  req.pipe(concat(function(result){
+    done(null, result.toString())
+  }))
+  req.end(data)
 }
 
 function json_post_request(url, data, done){
