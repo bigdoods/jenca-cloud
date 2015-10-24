@@ -1,6 +1,6 @@
 var Storage = require('./librarystorage')
 
-module.exports = function(type, opts){
+module.exports = function(type, bus, opts){
 
   if(!type) type = 'jsonfile'
     

@@ -1,6 +1,11 @@
 var EventEmitter2 = require('eventemitter2').EventEmitter2;
 
+var GLOBAL_BUS = null
+
 module.exports = function(opts){
+
+  if(GLOBAL_BUS) return GLOBAL_BUS
+
   var bus = new EventEmitter2({
     wildcard: true
   })
@@ -16,6 +21,8 @@ module.exports = function(opts){
     })
     done()
   }
+
+  GLOBAL_BUS = bus
 
   return bus
 }

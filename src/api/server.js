@@ -5,8 +5,10 @@ var fs = require('fs')
 
 var packagejson = require('./package.json')
 var utils = require('./utils')
+
 var Database = require('./database')
 var Library = require('./library')
+var MessageBus = require('./messagebus')
 
 var APIVERSION = 'v1'
 var USER_ID = 1
@@ -18,8 +20,10 @@ function get_route(route){
 module.exports = function(opts){
 
   var router = Router()
-  var database = Database(opts.storage, opts)
-  var library = Library(opts.library, opts)
+
+  var bus = MessageBus()
+  var database = Database(opts.storage, bus, opts)
+  var library = Library(opts.library, bus, opts)
   var fileServer = ecstatic({ root: __dirname + '/web' })
 
   router.addRoute(get_route('version'), {

@@ -9,6 +9,7 @@ var args = require('minimist')(process.argv, {
     p:'port',
     s:'storage',
     l:'library',
+    m:'messagebus',
     d:'datafile',
     f:'libraryfile'
   },
@@ -16,6 +17,7 @@ var args = require('minimist')(process.argv, {
     port:80,
     storage:process.env.STORAGE || 'jsonfile',
     library:process.env.LIBRARY || 'jsonfile',
+    messagebus:process.env.MESSAGE_BUS || 'memory',
     datafile:process.env.DATA_FILE || DEFAULT_DATA_FILE,
     libraryfile:process.env.LIBRARY_FILE || DEFAULT_LIBRARY_FILE
   }

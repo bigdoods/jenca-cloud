@@ -1,13 +1,23 @@
 var Storage = require('./databasestorage')
+var MessageBus = require('./messagebus')
+var Messages = require('./messages')
 
-module.exports = function(type, opts){
+module.exports = function(type, bus, opts){
 
   if(!type) type = 'jsonfile'
     
   var storage = Storage(type, opts)
+  var messages = Messages(bus)
 
   function create_project(userid, data, done){
-    storage.create_project(userid, data, done)
+    storage.create_project(userid, data, function(err, project){
+      if(err) return done(err)
+
+      messages.create_project(userid, data, function(err){
+        if(err) return done(err)
+        done(null, project)
+      })
+    })
   }
 
   function get_project(userid, projectid, done){
