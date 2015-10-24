@@ -14,4 +14,4 @@ var args = require('minimist')(process.argv, {
 
 utils.bind_server(args, function(error, server){
   console.log('server listening on port: ' + args.port)
-}))
+})
