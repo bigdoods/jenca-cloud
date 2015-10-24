@@ -1,4 +1,4 @@
-.PHONY: test apitest build apishell run
+.PHONY: test apitest build apishell run devinstall windowsinstall
 
 build:
 	@docker build -t jencacloud/api:1.0.0 src/api
@@ -22,6 +22,15 @@ test: apitest
 
 run: build
 	docker-compose up
+
+nodejs:
+	apt-get install -y python-software-properties make python
+	wget -qO /usr/local/bin/nave https://raw.github.com/isaacs/nave/master/nave.sh
+	chmod a+x /usr/local/bin/nave
+	nave usemain 0.11.13
+
+install: build nodejs
+	cd ./src/api && npm install
 
 # this runs the docker-compose but mounts the web folder for
 # instant changes
