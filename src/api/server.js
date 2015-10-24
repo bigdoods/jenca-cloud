@@ -6,6 +6,7 @@ var fs = require('fs')
 var packagejson = require('./package.json')
 var utils = require('./utils')
 var Database = require('./database')
+var Library = require('./library')
 
 var APIVERSION = 'v1'
 var USER_ID = 1
@@ -18,6 +19,7 @@ module.exports = function(opts){
 
   var router = Router()
   var database = Database(opts.storage, opts)
+  var library = Library(opts.library, opts)
   var fileServer = ecstatic({ root: __dirname + '/web' })
 
   router.addRoute(get_route('version'), {
@@ -53,6 +55,15 @@ module.exports = function(opts){
         }
         res.setHeader('Content-type', 'application/json')
         res.end(JSON.stringify(project))
+      })
+    }
+  })
+
+  router.addRoute(get_route('applications'), {
+    GET: function(req, res){
+      library.list_applications(function(err, data){
+        res.setHeader('Content-type', 'application/json')
+        res.end(JSON.stringify(data))
       })
     }
   })

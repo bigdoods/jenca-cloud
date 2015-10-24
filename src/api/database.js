@@ -1,4 +1,4 @@
-var Storage = require('./storage')
+var Storage = require('./databasestorage')
 
 module.exports = function(type, opts){
 
