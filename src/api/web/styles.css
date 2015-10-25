@@ -1,0 +1,17 @@
+body {
+	width: 100%;
+    background-image: url("/images/background.png");
+    background-size:100%;
+    background-repeat: no-repeat;
+
+}
+
+h1 {
+    color: orange;
+    text-align: center;
+}
+
+p {
+    font-family: sans;
+    font-size: 20px;
+}
