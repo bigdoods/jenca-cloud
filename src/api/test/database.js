@@ -27,7 +27,9 @@ tape('create project should emit container events', function (t) {
   setup.bus.json_subscribe('container.start', function(data){
     messages.push(data)
   }, function(){
-    setup.database.create_project(1, project_fixture, function(err, project){
+    setup.database.create_project(1, project_fixture, function(){})
+
+    setTimeout(function(){
 
       t.equal(messages.length, 2)
 
@@ -39,7 +41,8 @@ tape('create project should emit container events', function (t) {
       t.equal(messages[0].project.containers[0].image, 'jenca/testimage:1.0.0')
       t.equal(messages[0].project.containers[1].image, 'jenca/testimage2:1.0.0')
       t.end()
-    })
+      
+    }, 1000)
   })
 
 })

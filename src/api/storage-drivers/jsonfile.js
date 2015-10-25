@@ -62,6 +62,18 @@ module.exports = function(opts){
     done(null, data)
   }
 
+  function project_running(userid, data, done){
+    if(!state.users[userid]){
+      done('there is no user with id: ' + userid)
+      return
+    }
+    var user = state.users[userid]
+    var project = user.projects[data.id]
+    project.containers = data.containers
+    save_data()
+    done(null, project)
+  }
+
   function get_project(userid, projectid, done){
     if(!state.users[userid]){
       done('there is no user with id: ' + userid)
@@ -110,6 +122,7 @@ module.exports = function(opts){
 
   return {
     create_project:create_project,
+    project_running:project_running,
     get_project:get_project,
     list_projects:list_projects,
     delete_project:delete_project,

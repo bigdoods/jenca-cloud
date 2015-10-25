@@ -14,12 +14,18 @@ module.exports = function(type, bus, opts){
 
     var project = null
     async.waterfall([
+      // initially save the project
       function(next){
         storage.create_project(userid, data, next)
       },
+      // run the containers
       function(projectdata, next){
         project = projectdata
         messages.create_project(userid, project, next)
+      },
+      // containers are running - save the project
+      function(next){
+        storage.project_running(userid, project, next)
       }
     ], function(err){
       if(err) return done(err)

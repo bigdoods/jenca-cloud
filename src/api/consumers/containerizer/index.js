@@ -1,5 +1,6 @@
 var drivers = {
-  localdocker:require('./drivers/localdocker')
+  localdocker:require('./drivers/localdocker'),
+  test:require('./drivers/test')
 }
 
 module.exports = function(type, opts){
@@ -8,8 +9,8 @@ module.exports = function(type, opts){
 
   driver.listen = function(bus){
     bus.json_subscribe('container.start', function(data){
-      driver.start_container(data, function(err){
-        
+      driver.start_container(data, function(err, result){
+        bus.json_publish('container.started', result)
       })
     })
   }

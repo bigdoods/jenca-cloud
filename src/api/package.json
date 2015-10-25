@@ -5,7 +5,8 @@
   "description": "The API server for Jenca cloud",
   "main": "index.js",
   "scripts": {
-    "test": "set -e; for t in test/*.js; do node $t; done"
+    "test": "set -e; for t in test/*.js; do node $t; done",
+    "test2": "node test/database.js"
   },
   "devDependencies": {
     "tape": "^2.12.3"

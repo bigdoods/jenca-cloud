@@ -7,6 +7,7 @@ var path = require('path')
 function get_server(done){
   serverutils.bind_server({
     datafile:utils.tempfile(),
+    containerizer:'test',
     libraryfile:path.join(__dirname, 'fixtures', 'library.json')
   }, done)
 }
