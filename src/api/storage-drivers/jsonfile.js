@@ -57,6 +57,7 @@ module.exports = function(opts){
     data.id = id
     data.containers.forEach(function(container){
       container.id = uuid.v1()
+      container.host = data.project_host
     })
     save_data()
     done(null, data)

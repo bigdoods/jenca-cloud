@@ -39,6 +39,17 @@ module.exports = function(opts){
   })
 
   router.addRoute(get_route('projects'), {
+    GET: function(req, res){
+      database.list_projects(USER_ID, function(err, projects){
+        if(err){
+            res.statusCode = 500
+            res.end(err)
+            return
+          }
+          res.setHeader('Content-type', 'application/json')
+          res.end(JSON.stringify(projects))
+      })
+    },
     POST: function(req, res){
       utils.slurp_json(req, function(err, data){
         database.create_project(USER_ID, data, function(err, project){

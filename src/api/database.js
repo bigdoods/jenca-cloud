@@ -6,6 +6,8 @@ var async = require('async');
 module.exports = function(type, bus, opts){
 
   if(!type) type = 'jsonfile'
+
+  var PROJECT_HOST = opts.projecthost || 'localhost'
     
   var storage = Storage(type, opts)
   var messages = Messages(bus)
@@ -16,6 +18,7 @@ module.exports = function(type, bus, opts){
     async.waterfall([
       // initially save the project
       function(next){
+        data.project_host = PROJECT_HOST
         storage.create_project(userid, data, next)
       },
       // run the containers

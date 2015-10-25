@@ -12,10 +12,12 @@ var args = require('minimist')(process.argv, {
     m:'messagebus',
     d:'datafile',
     f:'libraryfile',
-    c:'containerizer'
+    c:'containerizer',
+    h:'projecthost'
   },
   default:{
     port:80,
+    projecthost:process.env.PROJECT_HOST || 'localhost',
     storage:process.env.STORAGE || 'jsonfile',
     library:process.env.LIBRARY || 'jsonfile',
     messagebus:process.env.MESSAGE_BUS || 'memory',
