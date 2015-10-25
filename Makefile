@@ -40,5 +40,8 @@ developer: build
 devrun: build
 	docker-compose -f development.yml up
 
+prodrun: build
+	docker-compose -f production.yml up
+
 devcreate:
 	bash scripts/createproject.sh

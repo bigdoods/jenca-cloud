@@ -52,6 +52,12 @@ module.exports = function(opts){
     },
     POST: function(req, res){
       utils.slurp_json(req, function(err, data){
+
+        console.log('-------------------------------------------');
+        console.log('-------------------------------------------');
+        console.log('-------------------------------------------');
+        console.dir(data)
+        console.log(typeof(data))
         database.create_project(USER_ID, data, function(err, project){
           if(err){
             res.statusCode = 500

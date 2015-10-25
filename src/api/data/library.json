@@ -1,9 +1,19 @@
 [{
+  "label":"test",
   "name":"Test",
   "image":"jenca/testimage:1.0.0",
   "arguments":"apples"
 },{
+  "label":"bimserver",
   "name":"BIMServer",
-  "image":"jenca/bimserver:1.0.0",
-  "arguments":"oranges"
+  "image":"bimscript/docker-bimserver",
+  "arguments":"",
+  "ports":[{
+    "container":8080,
+    "host":null
+  }],
+  "env":{
+    "TOMCAT_USER":"bob",
+    "TOMCAT_PASSWORD":"bob"
+  }
 }]

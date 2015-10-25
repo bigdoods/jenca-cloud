@@ -8,6 +8,9 @@ module.exports = function(bus){
   var pending_containers = {}
 
   bus.json_subscribe('container.started', function(data){
+    console.log('-------------------------------------------');
+    console.log('-------------------------------------------');
+    console.log(JSON.stringify(data, null, 4))
     var fn = pending_containers[data.container.id]
     if(!fn) return
     fn(data)

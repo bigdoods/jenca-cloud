@@ -1,65 +1,211 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
-		<link rel="stylesheet" type="text/css" href="styles.css">
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="bootstrap.css">
+<link rel="stylesheet" href="styles2.css">
+		<!-- Latest compiled and minified CSS -->
 	</head>
 	
 	<body>
-		<div id="logo">
-			<img src="images/jencalight.png"></img>
-			<h1>Cloud</h1>
-		</div>
 
-		<!--FORM TO INITIATE NEW PROJECT-->
+		<div class="jumbotron">
+      <div class="container">
+        <img src="images/jencalight.png" style="width:50%;float:left;"></img>
+      </div>
+    </div>
 
-		<div id="new-project">
+		<div class="container" id="new-project">
+      <!-- Example row of columns -->
+      <div class="row">
+      	<!--FORM TO INITIATE NEW PROJECT-->
 
-			<!--PROJECT TITLE-->
-			<form>Project Title&nbsp<input id="title" type="text" name="project"></form>
-			<p>Select Applications</p>
+				<div>
+					<!--PROJECT TITLE-->
+					<form>
+					  <div class="form-group">
+					    <label for="project-name-input">Project Name</label>
+					    <input type="text" class="form-control" id="project-name-input" placeholder="Project Name">
+					  </div>
+					  <div class="form-group" id="render-applications">
 
-			<!--IMAGES-->
-			<div class="apps">
-				<div id="apps">
-					<% here is a loop of apps %>
+					  </div>
+					</form>
+
+					<!--BUILD BUTTON-->
+					<div id="buildbutton-container">
+						<input id="buildbutton" class="bluebutton" value="Create platform">
+					</div>
 				</div>
-				<div id="apps">
-					<% here is a loop of apps %>
-				</div>
-				<div id="apps">
-					<% here is a loop of apps %>
-				</div>
-			</div>
+      </div>
+    </div>
 
-			<!--BUILD BUTTON-->
-			<div id="buildbutton-container">
-			<input id="buildbutton" type="submit" value="Build platform">
-			</div>
-		</div>
+    <div class="container" id="create-project">
+      <!-- Example row of columns -->
+      <div class="row">
+      	<input id="createbutton" class="bluebutton" value="Build platform">
+      </div>
+    </div>
 
-		<!-- WHERE TO SEE YOUR RUNNING APPS -->
+    <div id="project-container">
 
-		<div class="project-area"
-			<div class="project-container">
-				<div id="project">
-					<div id="project-element"><% projectname %></div>
-					<div id="project-element"><% project id %></div>
-					<div id="project-element"><% apps running %></div>
-				</div>
-				<div id="project">
-					<div id="project-element"><% projectname %></div>
-					<div id="project-element"><% project id %></div>
-					<div id="project-element"><% apps running %></div>
-				</div>
-			</div>
-		</div>
+    </div>
+
+		
 
 	</body>
 
+ 
+<script id="template-application" type="text/template">
+		<% for(var i=0; i<applications.length; i++) {%>
+			<div class="checkbox">
+		    <label>
+		      <input class="appcheckbox" type="checkbox" id="<%= applications[i].label %>"> <%= applications[i].name %>
+		    </label>
+		  </div>
+		<% } %>
+</script>
+
+<script id="template-project" type="text/template">
+
+	<% for(var i=0; i<projects.length; i++) {%>
+	  <div class="container">
+	    <div class="row">
+
+	    	<div class="container">
+		      <div class="row">
+		      	<h3><%= projects[i].name %></h3>
+		      </div>
+		    </div>
+
+	    	<% for(var j=0; j<projects[i].containers.length; j++) {%>
+
+	    		<div class="container">
+		      	<div class="row">
+		      		<div class="col-sm-4">
+		      			<%= projects[i].containers[j].name %>
+		      		</div>
+		      		<div class="col-sm-4">
+		      			<%= projects[i].containers[j].image %>
+		      		</div>
+		      		<div class="col-sm-4">
+		      			<a href="http://<%= projects[i].containers[j].host %>:<%= projects[i].containers[j].ports[0].host %>" target="_blank">http://<%= projects[i].containers[j].host %>:<%= projects[i].containers[j].ports[0].host %></a>
+		      		</div>
+		      	</div>
+		      </div>
+
+	    	<% } %>
+
+	    </div>
+	  </div>
+	<% } %>
+</script>
 
 
 
 
 	<!-- SCRIPTS-->
+	<script src="ejs.js"></script>
 	<script src="jquery-1.11.3.js"></script>
+	<script src="bootstrap.js"></script>
+
+  <script>
+
+  var newProjectForm,createProjectForm,createButton,buildButton
+
+  var library = null
+  var applications = {}
+
+  function load_library(){
+  	$.getJSON( "/v1/applications", function( data ) {
+  		library = data
+  		library.forEach(function(app){
+  			applications[app.label] = app
+  		})
+  	})
+  }
+
+  function load_projects(){
+  	$.getJSON( "/v1/projects", function( data ) {
+  		var projects_html = template('template-project', {
+  			projects:data
+  		})
+  		$('#project-container').html(projects_html)
+  	})
+  }
+
+  function template(name, data){
+  	var template_source = $('#' + name).html()
+  	var template = new EJS({text: template_source})
+  	return template.render(data)
+  }
+
+  function createProject(){
+  	var apps = template('template-application', {
+  		applications:library
+  	})
+  	$('#render-applications').html(apps)
+  	newProjectForm.show()
+  	createProjectForm.hide()
+  }
+
+  function hideProjectForm(){
+    newProjectForm.hide()
+    createProjectForm.show()
+  }
+
+  function buildProject(){
+  	var name = $('#project-name-input').val()
+  	var containers = []
+
+  	$('.appcheckbox').each(function(){
+
+  		if($(this).is(':checked')){
+
+  			var app = applications[$(this).attr('id')]
+  			containers.push(app)
+  		}
+  		
+  	})
+
+  	var project = {
+  		name:name,
+  		containers:containers
+  	}
+
+    console.log(JSON.stringify(project, null, 4))
+
+  	$.ajax({
+		  type: "POST",
+		  url: '/v1/projects',
+		  data: JSON.stringify(project),
+		  dataType: 'json',
+		  success: function(response) {
+	    	load_projects()
+        hideProjectForm()
+			}
+		});
+
+  }
+
+  function init(){
+  	load_library()
+  	load_projects()
+  	newProjectForm = $('#new-project')
+  	createProjectForm = $('#create-project')
+  	createButton = $('#createbutton')
+  	buildButton = $('#buildbutton')
+  	newProjectForm.hide()
+
+  	createButton.on('click', createProject)
+  	buildButton.on('click', buildProject)
+  }
+
+  $(function(){
+  	init()
+  })
+  </script>
 </html>

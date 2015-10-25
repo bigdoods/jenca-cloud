@@ -83,20 +83,11 @@ body {
 /* RUNNING PROJECTS AREA */
 
 .project-area {
-	position: fixed;
-	width: 100%;
-	bottom: 0;
-	background-color: #000000;
-	left: 50%;
-	transform: translate(-50%);
+
 }
 
 .project-container {
-	position: absolute;
-	left: 50%;
-  	transform: translate(-50%);
-  	bottom: 0;
-  	display: block;
+	
 }
 
 #project {
@@ -107,7 +98,6 @@ body {
 	background-color: #ffffff;
 	margin: 5px;
   	border: solid #000000 2px;
-  	float: left;
 }
 
 #project-element {

@@ -1,0 +1,21 @@
+
+.bluebutton {
+	font-family: sans-serif;
+	color: #ffffff;
+	font-size: 22px;
+	background: #3498db;
+	padding: 10px 25px 10px 25px;
+	border: solid #1f628d 2px;
+	text-decoration: none;
+	position: relative;
+	left: 50%;
+	transform: translate(-50%);
+	margin-top: 20px;
+	text-align: center;
+	cursor:pointer;
+}
+
+.bluebutton:hover {
+  background: #3cb0fd;
+  text-decoration: none;
+}

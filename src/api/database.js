@@ -13,7 +13,6 @@ module.exports = function(type, bus, opts){
   var messages = Messages(bus)
 
   function create_project(userid, data, done){
-
     var project = null
     async.waterfall([
       // initially save the project
