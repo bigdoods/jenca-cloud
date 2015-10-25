@@ -7,5 +7,6 @@ api:
     - "STORAGE_DRIVER=json"
   volumes:
     - '/tmp/jenca-api:/data'
+    - '/var/run/docker.sock:/var/run/docker.sock'
 
   

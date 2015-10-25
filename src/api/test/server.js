@@ -53,6 +53,7 @@ tape('server should POST a project and then GET it', function (t) {
     t.equal(result.containers[0].name, 'Test')
     t.equal(result.containers[0].image, 'jenca/testimage:1.0.0')
     t.equal(result.containers[0].arguments, 'apples')
+    t.equal(result.containers[0].fruit, 'pears')
   }
   
   get_server(function(err, server){
