@@ -3,6 +3,14 @@
     "containers":[{
         "name":"BIMServer",
         "image":"bimscript/docker-bimserver",
-        "arguments":"apples"
+        "arguments":"apples",
+        "ports":[{
+          "container":8080,
+          "host":null
+        }],
+        "env":{
+          "TOMCAT_USER":"bob",
+          "TOMCAT_PASSWORD":"bob"
+        }
     }]
 }

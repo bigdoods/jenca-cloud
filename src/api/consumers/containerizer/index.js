@@ -10,7 +10,7 @@ module.exports = function(type, opts){
   driver.listen = function(bus){
     bus.json_subscribe('container.start', function(data){
       driver.start_container(data, function(err, result){
-        bus.json_publish('container.started', result)
+        bus.json_publish('container.started', result || {})
       })
     })
   }
