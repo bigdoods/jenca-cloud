@@ -5,41 +5,61 @@
 	</head>
 	
 	<body>
-		
-		<div>
+		<div id="logo">
+			<img src="images/jencalight.png"></img>
+			<h1>Cloud</h1>
+		</div>
+
+		<!--FORM TO INITIATE NEW PROJECT-->
+
+		<div id="new-project">
+
 			<!--PROJECT TITLE-->
-			<form>Project Title&nbsp<input type="text" name="project"></form>
+			<form>Project Title&nbsp<input id="title" type="text" name="project"></form>
 			<p>Select Applications</p>
 
 			<!--IMAGES-->
-			<div class="images">
-				<button>Image 1</button>
+			<div class="apps">
+				<div id="apps">
+					<% here is a loop of apps %>
+				</div>
+				<div id="apps">
+					<% here is a loop of apps %>
+				</div>
+				<div id="apps">
+					<% here is a loop of apps %>
+				</div>
 			</div>
-			<br>
-			<input type="submit" value="Make me a BIM platform">
+
+			<!--BUILD BUTTON-->
+			<div id="buildbutton-container">
+			<input id="buildbutton" type="submit" value="Build platform">
+			</div>
+		</div>
+
+		<!-- WHERE TO SEE YOUR RUNNING APPS -->
+
+		<div class="project-area"
+			<div class="project-container">
+				<div id="project">
+					<div id="project-element"><% projectname %></div>
+					<div id="project-element"><% project id %></div>
+					<div id="project-element"><% apps running %></div>
+				</div>
+				<div id="project">
+					<div id="project-element"><% projectname %></div>
+					<div id="project-element"><% project id %></div>
+					<div id="project-element"><% apps running %></div>
+				</div>
+			</div>
 		</div>
 
 	</body>
 
+
+
+
+
 	<!-- SCRIPTS-->
 	<script src="jquery-1.11.3.js"></script>
-	<script>
-	  $(function() {
-	    $( "button" )
-	      .button()
-	      .click(function( event ) {
-	        event.preventDefault();
-	      });
-	  });
-	</script>
-
-	<script>
-	  $(function() {
-	    $( "input[type=submit]" )
-	      .button()
-	      .click(function( event ) {
-	        event.preventDefault();
-	      });
-	  });
-	</script>
 </html>
