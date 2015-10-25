@@ -6,7 +6,7 @@ module.exports = function(bus){
     var array_of_functions = project.containers.map(function(container){
       
       return function(publish_done){
-        bus.publish('container.start', {
+        bus.json_publish('container.start', {
           user:userid,
           project:project,
           container:container

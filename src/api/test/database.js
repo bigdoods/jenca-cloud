@@ -24,7 +24,7 @@ tape('create project should emit container events', function (t) {
 
   var messages = []
 
-  setup.bus.subscribe('container.start', function(data){
+  setup.bus.json_subscribe('container.start', function(data){
     messages.push(data)
   }, function(){
     setup.database.create_project(1, project_fixture, function(err, project){

@@ -55,6 +55,9 @@ module.exports = function(opts){
     var user = ensure_user(userid)
     user.projects[id] = data
     data.id = id
+    data.containers.forEach(function(container){
+      container.id = uuid.v1()
+    })
     save_data()
     done(null, data)
   }

@@ -21,7 +21,7 @@ module.exports = function(type, bus, opts){
         project = projectdata
         messages.create_project(userid, project, next)
       }
-    }], function(err){
+    ], function(err){
       if(err) return done(err)
       done(null, project)
     })
