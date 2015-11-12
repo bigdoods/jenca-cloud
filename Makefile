@@ -41,7 +41,7 @@ devrun: build
 	docker-compose -f development.yml up
 
 prodrun: build
-	docker-compose -f production.yml up
+	docker-compose -f production.yml up -d
 
 devcreate:
 	bash scripts/createproject.sh
