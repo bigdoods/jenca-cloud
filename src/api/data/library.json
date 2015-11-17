@@ -6,7 +6,7 @@
 },{
   "label":"bimserver",
   "name":"BIMServer",
-  "image":"bimscript/docker-bimserver",
+  "image":"connoralexander/docker-bimserver",
   "arguments":"",
   "ports":[{
     "container":8080,
