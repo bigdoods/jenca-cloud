@@ -1,4 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
+apt-get install -y make curl
 
 # install docker
 curl -sSL https://get.docker.com/ | sh
