@@ -3,6 +3,6 @@ api:
     file: docker-compose.yml
     service: api
   environment:
-    - "PROJECT_HOST=178.62.30.193"
+    - "PROJECT_HOST=IP_ADDRESS"
 
   
