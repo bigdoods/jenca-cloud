@@ -19,15 +19,9 @@ To start the development environment
 
 ## Production
 
-Spin up new server.
-Install docker (see install.sh)
-Install docker compose (see install.sh)
-Change IP in production.yml
-Install make if needed
+Spin up new server. See install.sh
 
-```bash
-$ apt-get -y install make
-```
+Change IP in production.yml
 
 then whilst SSH'd
 
