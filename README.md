@@ -4,7 +4,7 @@ An easy way to run BIM applications in the cloud.
 
 ## development
 
-To develop Jenca cloud - you need to install Virtualbox ([version ≥5.0.5](https://www.virtualbox.org/ticket/14563)) and Vagrant.
+To develop Jenca cloud - you need to install VirtualBox ([version ≥5.0.5](https://www.virtualbox.org/ticket/14563)) and Vagrant.
 
 Then you can use:
 
