@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - "4.1"
+sudo: required
+services:
+  - docker
+install:
+  - make developer
+  - make test
+# Post to Slack
+notifications:
+  slack: jencateam:m1Z9iUkUDDtl77hoUlm4SQEb
+

@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jenca-cloud/jenca-cloud.svg?branch=master)](https://travis-ci.org/jenca-cloud/jenca-cloud)
+
 # jenca cloud
 
 An easy way to run BIM applications in the cloud.
@@ -25,6 +27,16 @@ To run the tests in the Vagrant development environment, run:
 ```bash
 vagrant$ make tests
 ```
+
+### Contributing
+
+Jenca cloud uses [Travis-CI](https://travis-ci.org/jenca-cloud/jenca-cloud/) to run tests on each push of each branch.
+We use [Trello](https://trello.com/b/clWQd0u9/jenca-cloud-development) to track progress on work.
+To contribute to Jenca, create or find a Trello card, and create a branch with a name consisting of `issue-summary-<TRELLO-CARD-ID>`.
+You can find the ID of a card by going to the card, choosing "Share and more..." and then selecting the final part of the link to the card.
+
+Make changes on the branch and create a Pull Request in GitHub against `master`.
+Only merge the branch into `master` once Travis reports that all tests have passed.
 
 ## Production
 
