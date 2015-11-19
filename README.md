@@ -26,6 +26,16 @@ To run the tests in the Vagrant development environment, run:
 vagrant$ make tests
 ```
 
+### Contributing
+
+Jenca cloud uses [Travis-CI](https://travis-ci.org/jenca-cloud/jenca-cloud/) to run tests on each push of each branch.
+We use [Trello](https://trello.com/b/clWQd0u9/jenca-cloud-development) to track progress on work.
+To contribute to Jenca, create or find a Trello card, and create a branch with a name consisting of `issue-summary-<TRELLO-CARD-ID>`.
+You can find the ID of a card by going to the card, choosing "Share and more..." and then selecting the final part of the link to the card.
+
+When making changes
+Make changes for a card 
+
 ## Production
 
 Spin up new server. See install.sh
