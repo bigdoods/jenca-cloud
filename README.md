@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jenca-cloud/jenca-cloud.svg?branch=master)](https://travis-ci.org/jenca-cloud/jenca-cloud)
+
 ## jenca cloud
 
 An easy way to run BIM applications in the cloud.
