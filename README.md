@@ -33,8 +33,8 @@ We use [Trello](https://trello.com/b/clWQd0u9/jenca-cloud-development) to track 
 To contribute to Jenca, create or find a Trello card, and create a branch with a name consisting of `issue-summary-<TRELLO-CARD-ID>`.
 You can find the ID of a card by going to the card, choosing "Share and more..." and then selecting the final part of the link to the card.
 
-When making changes
-Make changes for a card 
+Make changes on the branch and create a Pull Request in GitHub against `master`.
+Only merge the branch into `master` once Travis reports that all tests have passed.
 
 ## Production
 
