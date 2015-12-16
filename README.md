@@ -6,6 +6,8 @@ An easy way to run BIM applications in the cloud.
 
 ## Development
 
+https://coreos.com/kubernetes/docs/latest/kubernetes-on-vagrant.html
+
 To develop Jenca cloud - you need to install VirtualBox ([version ≥5.0.6](https://www.virtualbox.org/ticket/14563)) and Vagrant.
 
 Then you can use:
