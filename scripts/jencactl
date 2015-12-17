@@ -57,6 +57,7 @@ cmd-start() {
 }
 
 cmd-stop() {
+	echo "stop"
 	#docker rm -f INSERTNAMESHERE
 }
 
