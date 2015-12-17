@@ -72,3 +72,35 @@ prodrun: build
 # (XXX: this does not live here)
 devcreate:
 	bash scripts/createproject.sh
+
+etcd:
+	docker run -d \
+	  --name etcd \
+	  --net host \
+	  kubernetes/etcd:2.0.5.1 \
+	  /usr/local/bin/etcd \
+	  	--addr=127.0.0.1:4001 \
+	  	--bind-addr=0.0.0.0:4001 \
+	  	--data-dir=/var/etcd/data
+
+hyperkube:
+	docker run -d \
+		--net host \
+		-v /var/run/docker.sock:/var/run/docker.sock \
+		gcr.io/google_containers/hyperkube:v0.17.0
+		/hyperkube kubelet \
+			--api_servers=http://localhost:8080 \
+			--v=2 \
+			--address=0.0.0.0 \
+			--enable_server \
+			--hostname_override=127.0.0.1 \
+			--config=/etc/kubernetes/manifests
+
+proxy:
+	docker run -d \
+		--net host \
+		--privileged \
+		gcr.io/google_containers/hyperkube:v0.17.0 \
+		/hyperkube proxy \
+			--master=http://127.0.0.1:8080 \
+			--v=2
