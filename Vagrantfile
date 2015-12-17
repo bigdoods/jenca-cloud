@@ -31,6 +31,9 @@ Vagrant.configure("2") do |config|
     vb.gui = false
   end
 
+  config.vm.network "private_network", ip: "172.17.8.150"
+  config.vm.synced_folder ".", "/home/core/share", id: "core", :nfs => true,  :mount_options   => ['nolock,vers=3,udp']
+
   config.vm.define vm_name = "coreos-k8s" do |worker|
     worker.vm.hostname = "coreos-k8s"
 
