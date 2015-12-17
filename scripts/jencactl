@@ -15,6 +15,13 @@ EOF
 	exit 1
 }
 
+# stop any container that the output of docker ps matches against the
+# given grep pattern
+grepstop-container() {
+	local pattern=$1
+	docker rm -f $(docker ps | grep $pattern | awk '{print $1}')
+}
+
 cmd-etcd() {
 	docker run -d \
 	  --name etcd \
@@ -30,7 +37,7 @@ cmd-hyperkube() {
 	docker run -d \
 		--net host \
 		-v /var/run/docker.sock:/var/run/docker.sock \
-		gcr.io/google_containers/hyperkube:v0.17.0
+		gcr.io/google_containers/hyperkube:v0.17.0 \
 		/hyperkube kubelet \
 			--api_servers=http://localhost:8080 \
 			--v=2 \
@@ -57,7 +64,12 @@ cmd-start() {
 }
 
 cmd-stop() {
-	echo "stop"
+	grepstop-container k8s_scheduler
+	grepstop-container k8s_apiserver
+	grepstop-container k8s_controller-manager
+	grepstop-container k8s_POD
+	grepstop-container kubelet
+	grepstop-container etcd	
 	#docker rm -f INSERTNAMESHERE
 }
 
