@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 #export WEAVE_URL=${WEAVE_URL:="https://raw.githubusercontent.com/zettio/weave/master/weaver/weave"}
 
