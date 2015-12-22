@@ -22,6 +22,7 @@ grepstop-container() {
 	docker rm -f $(docker ps | grep $pattern | awk '{print $1}')
 }
 
+# start the etcd docker container
 cmd-etcd() {
 	docker run -d \
 	  --name etcd \
@@ -33,11 +34,12 @@ cmd-etcd() {
 	  	--data-dir=/var/etcd/data
 }
 
+# start the various kubernetes containers via the kyperkube
 cmd-hyperkube() {
 	docker run -d \
 		--net host \
 		-v /var/run/docker.sock:/var/run/docker.sock \
-		gcr.io/google_containers/hyperkube:v0.17.0 \
+		gcr.io/google_containers/hyperkube:v1.0.1 \
 		/hyperkube kubelet \
 			--api_servers=http://localhost:8080 \
 			--v=2 \
@@ -47,22 +49,25 @@ cmd-hyperkube() {
 			--config=/etc/kubernetes/manifests
 }
 
+# start the kubernetes proxy (we are running the kubelet on this node)
 cmd-proxy() {
 	docker run -d \
 		--net host \
 		--privileged \
-		gcr.io/google_containers/hyperkube:v0.17.0 \
+		gcr.io/google_containers/hyperkube:v1.0.1 \
 		/hyperkube proxy \
 			--master=http://127.0.0.1:8080 \
 			--v=2
 }
 
+# wrapper to start the whole stack
 cmd-start() {
 	cmd-etcd
 	cmd-hyperkube
 	cmd-proxy
 }
 
+# logic to remove only the jenca/kubernetes containers
 cmd-stop() {
 	grepstop-container k8s_scheduler
 	grepstop-container k8s_apiserver

@@ -40,6 +40,8 @@ Vagrant.configure("2") do |config|
     worker.vm.provider :virtualbox do |vb|
       vb.memory = $vm_memory
     end
+
+    config.vm.provision "shell", inline: "cd /home/core/share/scripts && bash install.sh"
   end
 
 end
