@@ -19,7 +19,7 @@ EOF
 # given grep pattern
 grepstop-container() {
 	local pattern=$1
-	docker rm -f $(docker ps | grep $pattern | awk '{print $1}')
+	docker rm -f $(docker ps -a | grep $pattern | awk '{print $1}')
 }
 
 # start the etcd docker container
@@ -39,7 +39,7 @@ cmd-hyperkube() {
 	docker run -d \
 		--net host \
 		-v /var/run/docker.sock:/var/run/docker.sock \
-		gcr.io/google_containers/hyperkube:v1.0.1 \
+		gcr.io/google_containers/hyperkube:v1.1.1 \
 		/hyperkube kubelet \
 			--api_servers=http://localhost:8080 \
 			--v=2 \
@@ -54,7 +54,7 @@ cmd-proxy() {
 	docker run -d \
 		--net host \
 		--privileged \
-		gcr.io/google_containers/hyperkube:v1.0.1 \
+		gcr.io/google_containers/hyperkube:v1.1.1 \
 		/hyperkube proxy \
 			--master=http://127.0.0.1:8080 \
 			--v=2
@@ -69,12 +69,14 @@ cmd-start() {
 
 # logic to remove only the jenca/kubernetes containers
 cmd-stop() {
-	grepstop-container k8s_scheduler
-	grepstop-container k8s_apiserver
-	grepstop-container k8s_controller-manager
-	grepstop-container k8s_POD
-	grepstop-container kubelet
-	grepstop-container etcd	
+	grepstop-container k8s_scheduler || true
+	grepstop-container k8s_apiserver || true
+	grepstop-container k8s_controller-manager || true
+	grepstop-container k8s_controller-manager || true
+	grepstop-container k8s_POD || true
+	grepstop-container proxy || true
+	grepstop-container kubelet || true
+	grepstop-container etcd	|| true
 	#docker rm -f INSERTNAMESHERE
 }
 
