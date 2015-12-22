@@ -1,6 +1,7 @@
 #!/bin/bash -e
 
 #export WEAVE_URL=${WEAVE_URL:="https://raw.githubusercontent.com/zettio/weave/master/weaver/weave"}
+K8S_VERSION=1.1.1
 
 usage() {
 cat <<EOF
@@ -10,6 +11,8 @@ jencactl proxy
 jencactl hyperkube
 jencactl start
 jencactl stop
+jencactl restart
+jencactl images
 jencactl help
 EOF
 	exit 1
@@ -39,7 +42,7 @@ cmd-hyperkube() {
 	docker run -d \
 		--net host \
 		-v /var/run/docker.sock:/var/run/docker.sock \
-		gcr.io/google_containers/hyperkube:v1.1.1 \
+		gcr.io/google_containers/hyperkube:v${K8S_VERSION} \
 		/hyperkube kubelet \
 			--api_servers=http://localhost:8080 \
 			--v=2 \
@@ -54,7 +57,7 @@ cmd-proxy() {
 	docker run -d \
 		--net host \
 		--privileged \
-		gcr.io/google_containers/hyperkube:v1.1.1 \
+		gcr.io/google_containers/hyperkube:v${K8S_VERSION} \
 		/hyperkube proxy \
 			--master=http://127.0.0.1:8080 \
 			--v=2
@@ -80,6 +83,16 @@ cmd-stop() {
 	#docker rm -f INSERTNAMESHERE
 }
 
+cmd-restart() {
+	cmd-stop
+	cmd-start
+}
+
+cmd-images() {
+	cd /home/core/code/jenca-authentication && docker build -t jenca-cloud/authentication .
+	cd /home/core/share && docker build -t jenca-cloud/router src/router
+}
+
 main() {
 	case "$1" in
 	etcd)					        shift; cmd-etcd; $@;;
@@ -87,6 +100,8 @@ main() {
 	proxy)					      shift; cmd-proxy; $@;;
 	start)					      shift; cmd-start; $@;;
 	stop)					        shift; cmd-stop; $@;;
+	restart)					    shift; cmd-restart; $@;;
+	images)					      shift; cmd-images; $@;;
 	*)                    usage $@;;
 	esac
 }
