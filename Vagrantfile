@@ -32,7 +32,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.network "private_network", ip: "172.17.8.150"
-  config.vm.synced_folder ".", "/home/core/share", id: "core", :nfs => true,  :mount_options   => ['nolock,vers=3,udp']
+  config.vm.synced_folder ".", "/home/core/share", id: "core", :nfs => true,  :mount_options   => ['nolock,vers=3,tcp,noatime,clientaddr=172.17.8.150']
 
   config.vm.define vm_name = "coreos-k8s" do |worker|
     worker.vm.hostname = "coreos-k8s"
@@ -41,7 +41,7 @@ Vagrant.configure("2") do |config|
       vb.memory = $vm_memory
     end
 
-    config.vm.provision "shell", inline: "cd /home/core/share/scripts && bash install.sh"
+    #config.vm.provision "shell", inline: "cd /home/core/share/scripts && bash install.sh"
   end
 
 end
