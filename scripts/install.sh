@@ -20,11 +20,7 @@ chmod a+x /usr/local/bin/kubectl
 # link jencactl so it's in the $PATH
 ln -s /vagrant/scripts/jencactl /usr/local/bin/jencactl
 
-# get the code dependencies like the authentication for example
-#mkdir -p /home/core/code
-#cd /home/core/code && git clone https://github.com/jenca-cloud/jenca-authentication.git
-#chown -R core:core /home/core/code
-
 # use jencactl to build the images
+jencactl updatecode
 #jencactl images
 #jencactl start
