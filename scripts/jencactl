@@ -89,8 +89,9 @@ cmd-restart() {
 }
 
 cmd-images() {
-	cd /home/core/code/jenca-authentication && docker build -t jenca-cloud/authentication .
-	cd /home/core/share && docker build -t jenca-cloud/router src/router
+	echo "tbc"
+	#cd /home/core/code/jenca-authentication && docker build -t jenca-cloud/authentication .
+	#cd /home/core/share && docker build -t jenca-cloud/router src/router
 }
 
 main() {
@@ -101,7 +102,7 @@ main() {
 	start)					      shift; cmd-start; $@;;
 	stop)					        shift; cmd-stop; $@;;
 	restart)					    shift; cmd-restart; $@;;
-	images)					      shift; cmd-images; $@;;
+	#images)					      shift; cmd-images; $@;;
 	*)                    usage $@;;
 	esac
 }
