@@ -13,6 +13,7 @@ jencactl start
 jencactl stop
 jencactl restart
 jencactl images
+jencactl updatecode
 jencactl help
 EOF
 	exit 1
@@ -88,6 +89,29 @@ cmd-restart() {
 	cmd-start
 }
 
+# this tool is designed for the user to have already sorted out what branch each repo
+# is on and have committed any changes etc
+cmd-updatecode-repo() {
+	local repo=$1;
+
+	if [[ ! -d "/vagrant/repos/${repo}" ]]; then
+		echo "cloning $repo"
+		cd /vagrant/repos && git clone https://github.com/jenca-cloud/${repo}.git
+	fi
+
+	cd /vagrant/repos/${repo} && git pull
+}
+
+cmd-updatecode() {
+	cmd-updatecode-repo jenca-authorization
+	cmd-updatecode-repo jenca-authentication
+	cmd-updatecode-repo jenca-runtime
+	cmd-updatecode-repo jenca-projects
+	cmd-updatecode-repo jenca-library
+	cmd-updatecode-repo jenca-router
+	cmd-updatecode-repo jenca-gui
+}
+
 cmd-images() {
 	echo "tbc"
 	#cd /home/core/code/jenca-authentication && docker build -t jenca-cloud/authentication .
@@ -102,6 +126,7 @@ main() {
 	start)					      shift; cmd-start; $@;;
 	stop)					        shift; cmd-stop; $@;;
 	restart)					    shift; cmd-restart; $@;;
+	updatecode)					  shift; cmd-updatecode; $@;;
 	#images)					      shift; cmd-images; $@;;
 	*)                    usage $@;;
 	esac
