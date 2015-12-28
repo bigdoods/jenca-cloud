@@ -52,3 +52,15 @@ then whilst SSH'd
 $ make build
 $ make prodrun
 ```
+
+## Repos
+
+Each service in jenca cloud uses it's own repository under the `jenca-cloud/` namespace.  This repo is the `glue` between all of these service repos.  In order to enable the repos to appear inside the development environment, the provisioning script will `git clone` the various repos inside the `repos` folder (which is git ignored).
+
+This allows the development VM to see the various service repos and for the developer to still use their git credentials on the host to git commit/git push.
+
+## Images
+
+Each service will have a Makefile inside the repo that will have an `images` make step.  This will use `docker build` to create the jenca images from the various repos.  The `version` of these images is controlled by the VERSION variable at the top of each Makefile.
+
+
