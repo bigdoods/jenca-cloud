@@ -112,10 +112,26 @@ cmd-updatecode() {
 	cmd-updatecode-repo jenca-gui
 }
 
+cmd-build-images() {
+	local repo=$1;
+	cd /vagrant/repos/${repo} && make images
+}
+
+cmd-run-tests() {
+	local repo=$1;
+	cd /vagrant/repos/${repo} && make test
+}
+
 cmd-images() {
-	echo "tbc"
-	#cd /home/core/code/jenca-authentication && docker build -t jenca-cloud/authentication .
-	#cd /home/core/share && docker build -t jenca-cloud/router src/router
+	cmd-build-images jenca-authentication
+	cmd-build-images jenca-router
+	cmd-build-images jenca-gui
+}
+
+cmd-test() {
+	cmd-run-tests jenca-authentication
+	cmd-run-tests jenca-router
+	cmd-run-tests jenca-gui
 }
 
 main() {
@@ -127,7 +143,8 @@ main() {
 	stop)					        shift; cmd-stop; $@;;
 	restart)					    shift; cmd-restart; $@;;
 	updatecode)					  shift; cmd-updatecode; $@;;
-	#images)					      shift; cmd-images; $@;;
+	images)					      shift; cmd-images; $@;;
+	test)					        shift; cmd-test; $@;;
 	*)                    usage $@;;
 	esac
 }
