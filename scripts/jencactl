@@ -112,7 +112,7 @@ cmd-updatecode() {
 	cmd-updatecode-repo jenca-gui
 }
 
-cmd-build-images() {
+cmd-build-image() {
 	local repo=$1;
 	cd /vagrant/repos/${repo} && make images
 }
@@ -123,9 +123,9 @@ cmd-run-tests() {
 }
 
 cmd-images() {
-	cmd-build-images jenca-authentication
-	cmd-build-images jenca-router
-	cmd-build-images jenca-gui
+	cmd-build-image jenca-authentication
+	cmd-build-image jenca-router
+	cmd-build-image jenca-gui
 }
 
 cmd-test() {
