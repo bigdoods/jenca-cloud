@@ -124,12 +124,16 @@ cmd-run-tests() {
 
 cmd-images() {
 	cmd-build-image jenca-authentication
+	cmd-build-image jenca-authorization
+	cmd-build-image jenca-projects
 	cmd-build-image jenca-router
 	cmd-build-image jenca-gui
 }
 
 cmd-test() {
 	cmd-run-tests jenca-authentication
+	cmd-run-tests jenca-authorization
+	cmd-run-tests jenca-projects
 	cmd-run-tests jenca-router
 	cmd-run-tests jenca-gui
 }
