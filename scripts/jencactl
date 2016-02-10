@@ -111,6 +111,7 @@ cmd-updatecode() {
 	cmd-updatecode-repo jenca-library
 	cmd-updatecode-repo jenca-router
 	cmd-updatecode-repo jenca-gui
+	cmd-updatecode-repo jenca-level-storage
 }
 
 cmd-build-image() {
@@ -129,6 +130,7 @@ cmd-images() {
 	cmd-build-image jenca-projects
 	cmd-build-image jenca-router
 	cmd-build-image jenca-gui
+	cmd-build-image jenca-level-storage
 }
 
 cmd-test() {
@@ -137,6 +139,7 @@ cmd-test() {
 	cmd-run-tests jenca-projects
 	cmd-run-tests jenca-router
 	cmd-run-tests jenca-gui
+	cmd-run-tests jenca-level-storage
 }
 
 main() {
