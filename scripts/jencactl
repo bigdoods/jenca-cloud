@@ -131,6 +131,7 @@ cmd-images() {
 	cmd-build-image jenca-router
 	cmd-build-image jenca-gui
 	cmd-build-image jenca-level-storage
+	cmd-build-image jenca-library
 }
 
 cmd-test() {
@@ -140,6 +141,7 @@ cmd-test() {
 	cmd-run-tests jenca-router
 	cmd-run-tests jenca-gui
 	cmd-run-tests jenca-level-storage
+	cmd-run-tests jenca-library
 }
 
 main() {
