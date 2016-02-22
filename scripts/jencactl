@@ -97,7 +97,7 @@ cmd-updatecode-repo() {
 	if [[ ! -d "/vagrant/repos/${repo}" ]]; then
 		echo "cloning $repo"
 		mkdir -p /vagrant/repos
-		cd /vagrant/repos && git clone https://github.com/jenca-cloud/${repo}.git
+		cd /vagrant/repos && git clone "git@github.com:jenca-cloud/${repo}.git"
 	fi
 
 	cd /vagrant/repos/${repo} && git pull
