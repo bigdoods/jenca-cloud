@@ -18,7 +18,7 @@ First you need to install:
 Then to start the jenca development environment:
 
 ```bash
-$ bash ./scripts/boot.sh
+$ bash ./scripts/machine.sh boot
 ```
 
 This will create a kmachine managed VM using virtualbox called `jenca-devbox`.

@@ -24,7 +24,10 @@ cmd-destroy() {
 }
 
 cmd-env() {
-	eval "$(kmachine env ${BOX_NAME})"
+	echo
+	echo "run this command to configure kubectl and docker:"
+	echo
+	echo "\$ eval \"\$(kmachine env ${BOX_NAME})\""
 }
 
 main() {
