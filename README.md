@@ -60,7 +60,7 @@ $ make images
 Once the images are built - you can run the tests:
 
 ```bash
-$ make tests
+$ make test
 ```
 
 ## Repos
