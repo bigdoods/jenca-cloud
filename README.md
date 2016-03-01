@@ -18,10 +18,12 @@ First you need to install:
 Then to start the jenca development environment:
 
 ```bash
-$ make boot
+$ bash ./scripts/boot.sh
 ```
 
-Kubernetes is now running and you can do:
+This will create a kmachine managed VM using virtualbox called `jenca-devbox`.
+
+It will then auto-configure the local `kubectl` and `docker` clients so you can:
 
 ```bash
 $ kubectl get nodes
