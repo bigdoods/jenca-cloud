@@ -26,6 +26,7 @@ cmd-destroy() {
 cmd-env() {
 	echo
 	echo "run this command to configure kubectl and docker:"
+	echo "NOTE: it takes 30 seconds to boot the containers"
 	echo
 	echo "\$ eval \"\$(kmachine env ${BOX_NAME})\""
 }

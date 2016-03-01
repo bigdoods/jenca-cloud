@@ -8,6 +8,7 @@ Kubernetes based SaaS platform.
 
 To develop Jenca cloud - you need as OSX or Linux machine.
 
+#### install
 First you need to install:
 
  * [VirtualBox version <=4.3](https://www.virtualbox.org/wiki/Download_Old_Builds_4_3)
@@ -15,10 +16,11 @@ First you need to install:
  * [local Docker client](https://docs.docker.com/engine/installation/mac/)
  * [local kubectl client](https://coreos.com/kubernetes/docs/latest/configure-kubectl.html)
 
-Then to start the jenca development environment:
+#### boot vm
+To start the jenca development environment:
 
 ```bash
-$ bash ./scripts/machine.sh boot
+$ make boot
 ```
 
 This will create a kmachine managed VM using virtualbox called `jenca-devbox`.
@@ -38,6 +40,27 @@ This auto-configures your kubectl and docker client to VM - now you can:
 ```bash
 $ kubectl get nodes
 $ docker info
+```
+
+You can see the kmachine vm running and it's info:
+
+```bash
+$ kmachine ls
+$ kmachine inspect jenca-devbox
+```
+
+#### build images
+Then you need to build to code into the Docker images:
+
+```bash
+$ make images
+```
+
+#### run tests
+Once the images are built - you can run the tests:
+
+```bash
+$ make tests
 ```
 
 ## Repos
