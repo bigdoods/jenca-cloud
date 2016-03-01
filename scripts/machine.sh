@@ -15,6 +15,7 @@ EOF
 
 cmd-boot() {
 	kmachine create -d virtualbox ${BOX_NAME}
+	cmd-env
 }
 
 cmd-destroy() {
