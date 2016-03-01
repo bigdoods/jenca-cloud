@@ -23,7 +23,17 @@ $ bash ./scripts/machine.sh boot
 
 This will create a kmachine managed VM using virtualbox called `jenca-devbox`.
 
-It will then auto-configure the local `kubectl` and `docker` clients so you can:
+It will then print the following message:
+
+```
+run this command to configure kubectl and docker:
+
+$ eval "$(kmachine env jenca-devbox)"
+```
+
+Copy and paste the `eval "$(kmachine env jenca-devbox)` command and run it.
+
+This auto-configures your kubectl and docker client to VM - now you can:
 
 ```bash
 $ kubectl get nodes
