@@ -1,7 +1,10 @@
 .PHONY: boot updatecode
 
 boot:
-	bash ./scripts/boot.sh
+	@echo
+	@echo "please run:"
+	@echo
+	@echo "bash ./scripts/boot.sh"
 
 updatecode:
 	bash ./scripts/updaterepos.sh
