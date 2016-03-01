@@ -1,10 +1,16 @@
-.PHONY: boot updatecode
+.PHONY: boot destroy update images test
 
 boot:
-	@echo
-	@echo "please run:"
-	@echo
-	@echo "bash ./scripts/boot.sh"
+	bash ./scripts/machine.sh boot
 
-updatecode:
-	bash ./scripts/updaterepos.sh
+destroy:
+	bash ./scripts/machine.sh destroy
+
+update:
+	bash ./scripts/repos.sh update
+
+images:
+	bash ./scripts/images.sh build
+
+test:
+	bash ./scripts/tests.sh run	
