@@ -14,6 +14,8 @@ EOF
 }
 
 cmd-boot() {
+	# docker-machine create --driver virtualbox jenca-devbox
+	# docker-machine ssh jenca-devbox 'sudo sh -c "echo nameserver 8.8.8.8 > /etc/resolv.conf"'
 	kmachine create -d virtualbox ${BOX_NAME}
 	cmd-env
 }
