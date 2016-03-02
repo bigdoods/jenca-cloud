@@ -19,3 +19,4 @@ spec:
         image: jenca/docker-bimserver:1.4.0-FINAL-2015-11-04
         ports:
         - containerPort: 8080
+        

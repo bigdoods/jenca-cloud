@@ -19,3 +19,4 @@ spec:
         image: owncloud
         ports:
         - containerPort: 80
+        
