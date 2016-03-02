@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: projects
+  name: projects-controller
+spec:
+  replicas: 1
+  selector:
+    name: projects
+  template:
+    metadata:
+      labels:
+        name: projects
+    spec:
+      containers:
+      - image: jenca/jenca-projects
+        name: projects
+        ports:
+        - containerPort: 80
+          name: http-server
