@@ -49,6 +49,21 @@ $ kmachine ls
 $ kmachine inspect jenca-devbox
 ```
 
+If you kill the vm with
+
+```bash
+kmachine kill jenca-devbox
+```
+you will need to
+
+```bash
+$ kmachine start jenca-devbox
+$ bash scripts/machine.sh env
+```
+
+and copy paste the `eval "$(kmachine env jenca-devbox)` command again.
+
+
 #### build images
 Then you need to build to code into the Docker images:
 
