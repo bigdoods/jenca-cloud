@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ghost
+  name: wordpress
   labels:
-    app: ghost
+    app: wordpress
 spec:
   type: LoadBalancer
   ports:
-    - port: 2368
-      targetPort: 2368
+    - port: 80
+      targetPort: 80
       protocol: TCP
   selector:
-    app: ghost
+    app: wordpress

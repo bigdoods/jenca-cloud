@@ -1,1 +1,1 @@
-docker run -d -p 80:80 owncloud:8.1
+docker run --name some-wordpress --link some-mysql:mysql -d wordpress

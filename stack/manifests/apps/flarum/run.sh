@@ -1,1 +1,1 @@
-docker run -d -p 80:80 owncloud:8.1
+docker run -p 80:80 sebp/flarum

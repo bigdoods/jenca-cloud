@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ghost
+  name: owncloud
   labels:
-    app: ghost
+    app: owncloud
 spec:
   type: LoadBalancer
   ports:
-    - port: 2368
-      targetPort: 2368
+    - port: 80
+      targetPort: 80
       protocol: TCP
   selector:
-    app: ghost
+    app: owncloud
