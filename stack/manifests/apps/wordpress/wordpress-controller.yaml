@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: owncloud
+  name: owncloud-controller
+spec:
+  replicas: 1
+  selector:
+    app: owncloud
+  template:
+    metadata:
+      name: owncloud
+      labels:
+        app: owncloud
+    spec:
+      containers:
+      - name: owncloud
+        image: owncloud
+        ports:
+        - containerPort: 80
+        
