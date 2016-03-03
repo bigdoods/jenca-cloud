@@ -3,6 +3,7 @@
 https://github.com/kubernetes/kubernetes/blob/master/docs/getting-started-guides/docker.md
 
  * [running k8s via docker](http://kubernetes.io/v1.1/docs/getting-started-guides/docker.html) - [github version](https://github.com/kubernetes/kubernetes/blob/master/docs/getting-started-guides/docker.md)
+ * [weave-kubernetes-anywhere](https://github.com/weaveworks/weave-kubernetes-anywhere)
 
 ## setting the kubectl to point at a cluster
 
