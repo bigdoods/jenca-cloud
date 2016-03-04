@@ -12,57 +12,28 @@ To develop Jenca cloud - you need as OSX or Linux machine.
 First you need to install:
 
  * [VirtualBox version <=4.3](https://www.virtualbox.org/wiki/Download_Old_Builds_4_3)
- * [kmachine](https://github.com/skippbox/kmachine)
- * [local Docker client](https://docs.docker.com/engine/installation/mac/)
- * [local kubectl client](https://coreos.com/kubernetes/docs/latest/configure-kubectl.html)
+ * [Vagrant](https://www.vagrantup.com/docs/installation/)
 
 #### boot vm
 To start the jenca development environment:
 
 ```bash
-$ make boot
+$ vagrant up
+$ vagrant ssh
+$ cd /vagrant
 ```
 
-This will create a kmachine managed VM using virtualbox called `jenca-devbox`.
-
-It will then print the following message:
-
-```
-run this command to configure kubectl and docker:
-
-$ eval "$(kmachine env jenca-devbox)"
-```
-
-Copy and paste the `eval "$(kmachine env jenca-devbox)` command and run it.
-
-This auto-configures your kubectl and docker client to VM - now you can:
+To start the Kubernetes cluster:
 
 ```bash
-$ kubectl get nodes
-$ docker info
+$ bash scripts/k8s.sh start
 ```
 
-You can see the kmachine vm running and it's info:
+To stop the Kubernetes cluster:
 
 ```bash
-$ kmachine ls
-$ kmachine inspect jenca-devbox
+$ bash scripts/k8s.sh stop
 ```
-
-If you kill the vm with
-
-```bash
-kmachine kill jenca-devbox
-```
-you will need to
-
-```bash
-$ kmachine start jenca-devbox
-$ bash scripts/machine.sh env
-```
-
-and copy paste the `eval "$(kmachine env jenca-devbox)` command again.
-
 
 #### build images
 Then you need to build to code into the Docker images:
