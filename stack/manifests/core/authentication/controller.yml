@@ -2,20 +2,20 @@ apiVersion: v1
 kind: ReplicationController
 metadata:
   labels:
-    name: router
-  name: router-controller
+    name: authentication
+  name: authentication-controller
 spec:
   replicas: 1
   selector:
-    name: router
+    name: authentication
   template:
     metadata:
       labels:
-        name: router
+        name: authentication
     spec:
       containers:
-      - image: jenca/jenca-router
-        name: router
+      - image: jenca/jenca-authentication
+        name: authentication
         ports:
         - containerPort: 80
           name: http-server

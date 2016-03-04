@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: router
+  name: authorization
   labels:
-    name: router
+    name: authorization
 spec:
   type: LoadBalancer
   ports:
@@ -11,4 +11,4 @@ spec:
       targetPort: 80
       protocol: TCP
   selector:
-    name: router
+    name: authorization
