@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-K8S_VERSION=1.1.1
-
 set -e
 # this is the script vagrant will use to provision the box
 
@@ -16,11 +14,3 @@ usermod -aG docker vagrant
 echo "downloading kubectl..."
 curl https://storage.googleapis.com/kubernetes-release/release/v${K8S_VERSION}/bin/linux/amd64/kubectl --silent --output /usr/local/bin/kubectl
 chmod a+x /usr/local/bin/kubectl
-
-# link jencactl so it's in the $PATH
-ln -s /vagrant/scripts/jencactl /usr/local/bin/jencactl
-
-# use jencactl to build the images
-jencactl updatecode
-#jencactl images
-#jencactl start
