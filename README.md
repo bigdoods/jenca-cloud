@@ -26,13 +26,13 @@ $ cd /vagrant
 To start the Kubernetes cluster:
 
 ```bash
-$ bash scripts/k8s.sh start
+$ make k8s.start
 ```
 
 To stop the Kubernetes cluster:
 
 ```bash
-$ bash scripts/k8s.sh stop
+$ make k8s.stop
 ```
 
 #### build images
@@ -54,7 +54,7 @@ $ make test
 Each service in jenca cloud uses it's own repository under the `jenca-cloud/` namespace.  This repo is the `glue` between all of these service repos.  In order to enable the repos to appear inside the development environment, you need to `git clone` the various repos inside the `repos` folder (which is git ignored).
 
 ```bash
-$ make updatecode
+$ make update
 ```
 
 This allows the development VM to see the various service repos and for the developer to still use their git credentials on the host to git commit/git push.
