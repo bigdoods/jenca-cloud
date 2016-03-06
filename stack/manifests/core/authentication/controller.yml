@@ -21,7 +21,7 @@ spec:
         - name: SECRET_KEY
           value: "secret"
         - name: STORAGE_HOST
-          value: "env:XXX"
+          value: "env:AUTHENTICATION_STORAGE_SERVICE_HOST"
         ports:
         - containerPort: 5000
           name: http-server

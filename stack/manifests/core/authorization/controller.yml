@@ -18,7 +18,7 @@ spec:
         name: authorization
         env:
         - name: POSTGRES_HOST
-          value: "env:XXX"
+          value: "env:AUTHORIZATION_DB_SERVICE_HOST"
         - name: POSTGRES_USER
           value: "username"
         - name: POSTGRES_PASSWORD

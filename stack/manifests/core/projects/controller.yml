@@ -18,7 +18,7 @@ spec:
         name: projects
         env:
         - name: LEVEL_HOST
-          value: "env:XXX"
+          value: "env:PROJECTS_STORAGE_SERVICE_HOST"
         ports:
         - containerPort: 80
           name: http-server

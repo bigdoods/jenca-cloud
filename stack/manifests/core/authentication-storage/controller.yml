@@ -19,7 +19,7 @@ spec:
         command: ["python","storage/storage.py"]
         env:
         - name: POSTGRES_HOST
-          value: "env:XXX"
+          value: "env:AUTHENTICATION_DB_SERVICE_HOST"
         - name: POSTGRES_USER
           value: "username"
         - name: POSTGRES_PASSWORD
