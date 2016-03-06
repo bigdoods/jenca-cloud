@@ -49,7 +49,7 @@ cmd-k8s-loop() {
   local resource="$3"
 
   local manifestdir="${DIR}/../stack/manifests/core"
-
+  
   if [[ "$service" == "*" ]]; then
     service=""
   fi
@@ -71,7 +71,7 @@ cmd-k8s-loop() {
     fi
 
   else
-    for dir in $(ls -d "${manifestdir}/*"); 
+    for dir in $(ls -d $manifestdir/*); 
     do
       if [[ -d "${dir}" && ! -f "${dir}/disable" ]]; then
         echo "here $dir"
@@ -81,7 +81,7 @@ cmd-k8s-loop() {
       fi
     done
     
-    for dir in $(ls -d "${manifestdir}/*"); 
+    for dir in $(ls -d $manifestdir/*); 
     do
       if [[ -d $dir && ! -f "${dir}/disable" ]]; then
         if [[ -z "$resource" || "$resource"=="controller" ]]; then
