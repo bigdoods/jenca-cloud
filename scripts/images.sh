@@ -24,6 +24,7 @@ cmd-build-images() {
 	cmd-build-image jenca-gui
 	cmd-build-image jenca-level-storage
 	cmd-build-image jenca-library
+	cmd-build-image jenca-runtime
 }
 
 main() {
