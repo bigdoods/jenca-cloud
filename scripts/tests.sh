@@ -17,14 +17,14 @@ cmd-run-test() {
 }
 
 cmd-run-tests() {
-	cmd-run-tests jenca-authentication
-	cmd-run-tests jenca-authorization
-	cmd-run-tests jenca-projects
-	cmd-run-tests jenca-router
-	cmd-run-tests jenca-gui
-	cmd-run-tests jenca-level-storage
-	cmd-run-tests jenca-library
-	cmd-run-tests jenca-runtime
+	cmd-run-test jenca-authentication
+	cmd-run-test jenca-authorization
+	cmd-run-test jenca-projects
+	cmd-run-test jenca-router
+	cmd-run-test jenca-gui
+	cmd-run-test jenca-level-storage
+	cmd-run-test jenca-library
+	cmd-run-test jenca-runtime
 }
 
 main() {
