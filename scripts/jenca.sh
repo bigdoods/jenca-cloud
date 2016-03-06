@@ -16,10 +16,16 @@ EOF
 cmd-k8s() {
   local action="$1"
   local file="$2"
-  local servicename=`basename $file`
+  local servicename=$(basename `dirname $file`)
+  local resourcename=$(basename $file)
+  local dir=$(dirname $file)
 
   if [[ -f "$file" ]]; then
-    echo "service $action: $servicename"
+    if [[ -f "$dir/disable" ]]; then
+      echo "service disabled: $servicename ($resourcename)"
+      return
+    fi
+    echo "service $action: $servicename ($resourcename)"
     kubectl $action -f $file
   fi
 }
@@ -53,11 +59,15 @@ cmd-k8s-loop() {
 
     # you can pass a single resources - k8s start jenca-router controller
     if [[ -z "$resource" || "$resource"=="service" ]]; then
-      cmd-k8s $action "${manifestdir}/${service}/service.yml"
+      if [[ ! -f "${dir}/disable" ]]; then
+        cmd-k8s $action "${manifestdir}/${service}/service.yml"
+      fi
     fi
 
     if [[ -z "$resource" || "$resource"=="controller" ]]; then
-      cmd-k8s $action "${manifestdir}/${service}/controller.yml"
+      if [[ ! -f "${dir}/disable" ]]; then
+        cmd-k8s $action "${manifestdir}/${service}/controller.yml"
+      fi
     fi
 
   else
