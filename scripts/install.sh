@@ -10,7 +10,4 @@ apt-get -y autoremove chef puppet
 curl https://get.docker.com/ | sh
 usermod -aG docker vagrant
 
-# download kubectl so we have easy access to k8s
-echo "downloading kubectl..."
-curl https://storage.googleapis.com/kubernetes-release/release/v${K8S_VERSION}/bin/linux/amd64/kubectl --silent --output /usr/local/bin/kubectl
-chmod a+x /usr/local/bin/kubectl
+bash /vagrant/scripts/k8s.sh download
