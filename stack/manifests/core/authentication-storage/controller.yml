@@ -2,20 +2,21 @@ apiVersion: v1
 kind: ReplicationController
 metadata:
   labels:
-    name: authorization
-  name: authorization
+    name: authentication-storage
+  name: authentication-storage
 spec:
   replicas: 1
   selector:
-    name: authorization
+    name: authentication-storage
   template:
     metadata:
       labels:
-        name: authorization
+        name: authentication-storage
     spec:
       containers:
-      - image: jenca/jenca-authorization
-        name: authorization
+      - image: jenca/jenca-authentication
+        name: authentication-storage
+        command: ["python","storage/storage.py"]
         env:
         - name: POSTGRES_HOST
           value: "env:XXX"
@@ -24,7 +25,7 @@ spec:
         - name: POSTGRES_PASSWORD
           value: "password"
         - name: POSTGRES_DATABASE
-          value: "jenca-authorization"
+          value: "jenca-authentication"
         ports:
-        - containerPort: 80
+        - containerPort: 5001
           name: http-server

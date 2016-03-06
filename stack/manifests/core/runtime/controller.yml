@@ -3,7 +3,7 @@ kind: ReplicationController
 metadata:
   labels:
     name: runtime
-  name: runtime-controller
+  name: runtime
 spec:
   replicas: 1
   selector:

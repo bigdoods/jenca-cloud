@@ -3,7 +3,7 @@ kind: ReplicationController
 metadata:
   labels:
     name: authentication
-  name: authentication-controller
+  name: authentication
 spec:
   replicas: 1
   selector:
@@ -16,6 +16,12 @@ spec:
       containers:
       - image: jenca/jenca-authentication
         name: authentication
+        command: ["python","authentication/authentication.py"]
+        env:
+        - name: SECRET_KEY
+          value: "secret"
+        - name: STORAGE_HOST
+          value: "env:XXX"
         ports:
-        - containerPort: 80
+        - containerPort: 5000
           name: http-server

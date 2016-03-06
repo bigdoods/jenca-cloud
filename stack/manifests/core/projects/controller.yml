@@ -3,7 +3,7 @@ kind: ReplicationController
 metadata:
   labels:
     name: projects
-  name: projects-controller
+  name: projects
 spec:
   replicas: 1
   selector:
@@ -16,6 +16,9 @@ spec:
       containers:
       - image: jenca/jenca-projects
         name: projects
+        env:
+        - name: LEVEL_HOST
+          value: "env:XXX"
         ports:
         - containerPort: 80
           name: http-server

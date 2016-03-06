@@ -2,16 +2,16 @@ apiVersion: v1
 kind: ReplicationController
 metadata:
   labels:
-    name: authorization-storage
-  name: authorization-storage
+    name: authorization-db
+  name: authorization-db
 spec:
   replicas: 1
   selector:
-    name: authorization-storage
+    name: authorization-db
   template:
     metadata:
       labels:
-        name: authorization-storage
+        name: authorization-db
     spec:
       containers:
       - image: postgres

@@ -3,7 +3,7 @@ kind: ReplicationController
 metadata:
   labels:
     name: gui
-  name: gui-controller
+  name: gui
 spec:
   replicas: 1
   selector:
@@ -17,5 +17,5 @@ spec:
       - image: jenca/jenca-gui
         name: gui
         ports:
-        - containerPort: 80
+        - containerPort: 8080
           name: http-server

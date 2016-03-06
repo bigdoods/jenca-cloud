@@ -3,7 +3,7 @@ kind: ReplicationController
 metadata:
   labels:
     name: projects-storage
-  name: projects-storage-controller
+  name: projects-storage
 spec:
   replicas: 1
   selector:

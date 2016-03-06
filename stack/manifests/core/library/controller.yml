@@ -3,7 +3,7 @@ kind: ReplicationController
 metadata:
   labels:
     name: library
-  name: library-controller
+  name: library
 spec:
   replicas: 1
   selector:
