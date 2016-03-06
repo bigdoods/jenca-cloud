@@ -1,5 +1,5 @@
 clean:
-	docker rm -f `docker ps -aq`
+	docker rm -f `docker ps -q -f status=exited`
 
 update:
 	bash ./scripts/repos.sh update
