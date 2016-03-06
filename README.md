@@ -49,6 +49,14 @@ Once the images are built - you can run the tests:
 $ make test
 ```
 
+#### start/stop stack
+To start the jenca containers on k8s:
+
+```bash
+$ make jenca.start
+$ make jenca.stop
+```
+
 ## Repos
 
 Each service in jenca cloud uses it's own repository under the `jenca-cloud/` namespace.  This repo is the `glue` between all of these service repos.  In order to enable the repos to appear inside the development environment, you need to `git clone` the various repos inside the `repos` folder (which is git ignored).

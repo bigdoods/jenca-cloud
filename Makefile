@@ -16,4 +16,10 @@ k8s.start:
 k8s.stop:
 	bash scripts/k8s.sh stop
 
-.PHONY: clean update images test k8s.start k8s.stop
+jenca.start:
+	bash scripts/jenca.sh start
+
+jenca.stop:
+	bash scripts/jenca.sh stop
+
+.PHONY: clean update images test k8s.start k8s.stop jenca.start jenca.stop
