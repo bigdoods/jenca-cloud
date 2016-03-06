@@ -24,6 +24,7 @@ cmd-run-tests() {
 	cmd-run-tests jenca-gui
 	cmd-run-tests jenca-level-storage
 	cmd-run-tests jenca-library
+	cmd-run-tests jenca-runtime
 }
 
 main() {
