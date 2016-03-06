@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: authentication-storage
+  name: authentication-storage
+spec:
+  replicas: 1
+  selector:
+    name: authentication-storage
+  template:
+    metadata:
+      labels:
+        name: authentication-storage
+    spec:
+      containers:
+      - image: jenca/jenca-authentication
+        name: authentication-storage
+        command: ["python","storage/storage.py"]
+        ports:
+        - containerPort: 5001
+          name: http-server

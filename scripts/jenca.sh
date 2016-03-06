@@ -63,19 +63,19 @@ cmd-k8s-loop() {
   else
     for dir in $(ls -d "${manifestdir}/*"); 
     do
-      if [[ -d $dir ]]; then
+      if [[ -d "${dir}" && ! -f "${dir}/disable" ]]; then
         echo "here $dir"
         if [[ -z "$resource" || "$resource"=="service" ]]; then
-          cmd-k8s $action "${dir}/${service}/service.yml"
+          cmd-k8s $action "${dir}/service.yml"
         fi
       fi
     done
     
     for dir in $(ls -d "${manifestdir}/*"); 
     do
-      if [[ -d $dir ]]; then
+      if [[ -d $dir && ! -f "${dir}/disable" ]]; then
         if [[ -z "$resource" || "$resource"=="controller" ]]; then
-          cmd-k8s $action "${dir}/${service}/controller.yml"
+          cmd-k8s $action "${dir}/controller.yml"
         fi
       fi
     done
