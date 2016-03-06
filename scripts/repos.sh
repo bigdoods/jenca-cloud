@@ -22,7 +22,7 @@ cmd-updatecode-repo() {
   if [[ ! -d "${REPODIR}/${repo}" ]]; then
     echo "cloning $repo"
     mkdir -p "${REPODIR}"
-    cd ${REPODIR} && git clone "git@github.com:jenca-cloud/${repo}.git"
+    cd ${REPODIR} && git clone "https://github.com/jenca-cloud/${repo}.git"
   fi
 
   cd "${REPODIR}/${repo}" && git pull
