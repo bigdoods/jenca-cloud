@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: gui
+  name: gui-controller
+spec:
+  replicas: 1
+  selector:
+    name: gui
+  template:
+    metadata:
+      labels:
+        name: gui
+    spec:
+      containers:
+      - image: jenca/jenca-gui
+        name: gui
+        ports:
+        - containerPort: 80
+          name: http-server

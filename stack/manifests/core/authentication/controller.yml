@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: authentication
+  name: authentication-controller
+spec:
+  replicas: 1
+  selector:
+    name: authentication
+  template:
+    metadata:
+      labels:
+        name: authentication
+    spec:
+      containers:
+      - image: jenca/jenca-authentication
+        name: authentication
+        ports:
+        - containerPort: 80
+          name: http-server

@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: runtime
+  name: runtime-controller
+spec:
+  replicas: 1
+  selector:
+    name: runtime
+  template:
+    metadata:
+      labels:
+        name: runtime
+    spec:
+      containers:
+      - image: jenca/jenca-runtime
+        name: runtime
+        ports:
+        - containerPort: 80
+          name: http-server

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: flarum
+  name: flarum-controller
+spec:
+  replicas: 1
+  selector:
+    app: flarum
+  template:
+    metadata:
+      name: flarum
+      labels:
+        app: flarum
+    spec:
+      containers:
+      - name: flarum
+        image: flarum
+        ports:
+        - containerPort: 80
+        

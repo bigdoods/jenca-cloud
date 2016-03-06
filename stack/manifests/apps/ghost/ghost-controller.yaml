@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: ghost
+  name: ghost-controller
+spec:
+  replicas: 1
+  selector:
+    app: ghost
+  template:
+    metadata:
+      name: ghost
+      labels:
+        app: ghost
+    spec:
+      containers:
+      - name: ghost
+        image: ghost
+        ports:
+        - containerPort: 2368
+        

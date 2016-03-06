@@ -6,32 +6,56 @@ Kubernetes based SaaS platform.
 
 ## Development
 
-To develop Jenca cloud - you need to install VirtualBox ([version ≥5.0.6](https://www.virtualbox.org/ticket/14563)) and Vagrant.
+To develop Jenca cloud - you need as OSX or Linux machine.
 
-Then you can use:
+#### install
+First you need to install:
+
+ * [VirtualBox version <=4.3](https://www.virtualbox.org/wiki/Download_Old_Builds_4_3)
+ * [Vagrant](https://www.vagrantup.com/docs/installation/)
+
+#### boot vm
+To start the jenca development environment:
 
 ```bash
 $ vagrant up
 $ vagrant ssh
+$ cd /vagrant
 ```
 
-You are now on the Vagrant VM:
+To start the Kubernetes cluster:
 
 ```bash
-$ docker info
-$ jencactl images
-$ jencactl start
+$ make k8s.start
 ```
 
-Kubernetes is now running.  To run the tests:
+To stop the Kubernetes cluster:
 
 ```bash
-$ jencactl test
+$ make k8s.stop
+```
+
+#### build images
+Then you need to build to code into the Docker images:
+
+```bash
+$ make images
+```
+
+#### run tests
+Once the images are built - you can run the tests:
+
+```bash
+$ make test
 ```
 
 ## Repos
 
-Each service in jenca cloud uses it's own repository under the `jenca-cloud/` namespace.  This repo is the `glue` between all of these service repos.  In order to enable the repos to appear inside the development environment, the provisioning script will `git clone` the various repos inside the `repos` folder (which is git ignored).
+Each service in jenca cloud uses it's own repository under the `jenca-cloud/` namespace.  This repo is the `glue` between all of these service repos.  In order to enable the repos to appear inside the development environment, you need to `git clone` the various repos inside the `repos` folder (which is git ignored).
+
+```bash
+$ make update
+```
 
 This allows the development VM to see the various service repos and for the developer to still use their git credentials on the host to git commit/git push.
 
