@@ -17,15 +17,6 @@ spec:
       - image: jenca/jenca-authentication
         name: authentication-storage
         command: ["python","storage/storage.py"]
-        env:
-        - name: POSTGRES_HOST
-          value: "env:AUTHENTICATION_DB_SERVICE_HOST"
-        - name: POSTGRES_USER
-          value: "username"
-        - name: POSTGRES_PASSWORD
-          value: "password"
-        - name: POSTGRES_DATABASE
-          value: "jenca-authentication"
         ports:
         - containerPort: 5001
           name: http-server
