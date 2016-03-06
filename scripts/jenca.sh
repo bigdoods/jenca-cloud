@@ -17,16 +17,16 @@ cmd-k8s-service() {
   local action="$1"
   local dir="$2"
   local servicename=`basename $dir`
-  echo "starting service: $servicename"
-  kubectl create -f ${dir}/service.yml
+  echo "service $action: $servicename"
+  kubectl $action -f ${dir}/service.yml
 }
 
 cmd-k8s-controller() {
   local action="$1"
   local dir="$2"
   local servicename=`basename $dir`
-  echo "starting controller: $servicename"
-  kubectl create -f ${dir}/controller.yml
+  echo "controller $action: $servicename"
+  kubectl $action -f ${dir}/controller.yml
 }
 
 cmd-k8s-loop() {
