@@ -14,7 +14,7 @@ spec:
         name: projects-storage
     spec:
       containers:
-      - image: jenca/jenca-projects-storage
+      - image: jenca/jenca-level-storage
         name: projects-storage
         ports:
         - containerPort: 80
