@@ -17,14 +17,13 @@ cmd-build-image() {
 }
 
 cmd-build-images() {
-	cmd-build-image jenca-authentication
-	cmd-build-image jenca-authorization
-	cmd-build-image jenca-projects
-	cmd-build-image jenca-router
-	cmd-build-image jenca-gui
-	cmd-build-image jenca-level-storage
-	cmd-build-image jenca-library
-	cmd-build-image jenca-runtime
+	local repodir="${DIR}/../repos/*"
+	for dir in $(ls -d $repodir); 
+  do
+  	if [[ -d $dir ]]; then
+    	cmd-build-image `basename $dir`
+    fi
+  done
 }
 
 main() {

@@ -17,14 +17,13 @@ cmd-run-test() {
 }
 
 cmd-run-tests() {
-	cmd-run-test jenca-authentication
-	cmd-run-test jenca-authorization
-	cmd-run-test jenca-projects
-	cmd-run-test jenca-router
-	cmd-run-test jenca-gui
-	cmd-run-test jenca-level-storage
-	cmd-run-test jenca-library
-	cmd-run-test jenca-runtime
+	local repodir="${DIR}/../repos/*"
+	for dir in $(ls -d $repodir); 
+  do
+  	if [[ -d $dir ]]; then
+    	cmd-run-test `basename $dir`
+    fi
+  done
 }
 
 main() {
