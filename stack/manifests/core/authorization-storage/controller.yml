@@ -2,16 +2,16 @@ apiVersion: v1
 kind: ReplicationController
 metadata:
   labels:
-    name: auth-storage
-  name: auth-storage
+    name: authorization-storage
+  name: authorization-storage
 spec:
   replicas: 1
   selector:
-    name: auth-storage
+    name: authorization-storage
   template:
     metadata:
       labels:
-        name: auth-storage
+        name: authorization-storage
     spec:
       containers:
       - image: postgres
