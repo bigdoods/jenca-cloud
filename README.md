@@ -14,7 +14,13 @@ First you need to install:
  * [VirtualBox version <=4.3](https://www.virtualbox.org/wiki/Download_Old_Builds_4_3)
  * [Vagrant](https://www.vagrantup.com/docs/installation/)
 
-#### boot vm
+Pull the repo
+
+```bash
+$ git pull
+```
+
+#### Boot VM
 To start the jenca development environment:
 
 ```bash
@@ -23,19 +29,31 @@ $ vagrant ssh
 $ cd /vagrant
 ```
 
-To start the Kubernetes cluster:
-
+After doing a vagrant up - check it's installed by doing 
 ```bash
-$ make k8s.start
+$ docker info
 ```
 
-To stop the Kubernetes cluster:
-
+If it is not, exit from the VM and do
 ```bash
-$ make k8s.stop
+$ vagrant halt
+$ vagrant up --provision
 ```
 
-#### build images
+## Repos
+
+Each service in jenca cloud uses it's own repository under the `jenca-cloud/` namespace.  This repo is the `glue` between all of these service repos.  In order to enable the repos to appear inside the development environment, you need to `git clone` the various repos inside the `repos` folder (which is git ignored).
+
+```bash
+$ make update
+```
+
+This allows the development VM to see the various service repos and for the developer to still use their git credentials on the host to git commit/git push.
+
+#### Images
+
+Each service will have a Makefile inside the repo that will have an `images` make step.  This will use `docker build` to create the jenca images from the various repos.  The `version` of these images is controlled by the VERSION variable at the top of each Makefile.
+
 Then you need to build to code into the Docker images:
 
 ```bash
@@ -49,6 +67,21 @@ Once the images are built - you can run the tests:
 $ make test
 ```
 
+## Start and stop the cluster and stack
+
+#### start/stop cluster
+To start the Kubernetes cluster:
+
+```bash
+$ make k8s.start
+```
+
+To stop the Kubernetes cluster:
+
+```bash
+$ make k8s.stop
+```
+
 #### start/stop stack
 To start the jenca containers on k8s:
 
@@ -56,19 +89,9 @@ To start the jenca containers on k8s:
 $ make jenca.start
 $ make jenca.stop
 ```
-
-## Repos
-
-Each service in jenca cloud uses it's own repository under the `jenca-cloud/` namespace.  This repo is the `glue` between all of these service repos.  In order to enable the repos to appear inside the development environment, you need to `git clone` the various repos inside the `repos` folder (which is git ignored).
+## Check that everythings up
 
 ```bash
-$ make update
+$ kubectl get pods
+$ docker ps
 ```
-
-This allows the development VM to see the various service repos and for the developer to still use their git credentials on the host to git commit/git push.
-
-## Images
-
-Each service will have a Makefile inside the repo that will have an `images` make step.  This will use `docker build` to create the jenca images from the various repos.  The `version` of these images is controlled by the VERSION variable at the top of each Makefile.
-
-
