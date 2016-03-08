@@ -94,6 +94,13 @@ cmd-k8s-loop() {
 
 cmd-start() {
   cmd-k8s-loop create $@
+  # expose the router service as a node port on the host
+  kubectl expose rc router \
+    --port=80 \
+    --target-port=80 \
+    --name=jenca-router-public \
+    --type=NodePort
+  kubectl get svc jenca-router-public -o json 
 }
 
 cmd-replace() {
@@ -102,6 +109,7 @@ cmd-replace() {
 
 cmd-stop() {
   cmd-k8s-loop delete $@
+  kubectl delete svc jenca-router-public
 }
 
 main() {
