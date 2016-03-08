@@ -1,8 +1,0 @@
-api:
-  extends:
-    file: docker-compose.yml
-    service: api
-  volumes:
-    - ./src/api/web:/srv/app/web
-
-  
