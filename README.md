@@ -100,4 +100,20 @@ $ docker ps
 
 ```bash
 $ kubectl expose pod <podname> --port=<port> --target-port=<port> --name=<name> --type=NodePort
+$ kubectl get svc <servicename> -o json
 ```
+
+then look for:
+
+```json
+ports": [
+            {
+                "protocol": "TCP",
+                "port": <port>,
+                "targetPort": <targetPort>,
+                "nodePort": <nodePort>
+            }
+        ],
+```
+
+connect to `IP:<nodePort>` on your laptop, where `IP` is in the `Vagrantfile` (btw - we have mapped the current IP to dev.jenca.org)
