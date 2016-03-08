@@ -95,3 +95,9 @@ $ make jenca.stop
 $ kubectl get pods
 $ docker ps
 ```
+
+## Expose a single pod to test
+
+```bash
+$ kubectl expose pod <podname> --port=<port> --target-port=<port> --name=<name> --type=NodePort
+```
