@@ -5,7 +5,7 @@ update:
 	bash ./scripts/repos.sh update
 
 images:
-	bash ./scripts/images.sh build
+	bash ./scripts/images.sh build $(SERVICE)
 
 test:
 	bash ./scripts/tests.sh run
@@ -17,9 +17,16 @@ k8s.stop:
 	bash scripts/k8s.sh stop
 
 jenca.start:
-	bash scripts/jenca.sh start
+	bash scripts/jenca.sh start $(SERVICE)
 
 jenca.stop:
-	bash scripts/jenca.sh stop
+	bash scripts/jenca.sh stop $(SERVICE)
 
-.PHONY: clean update images test k8s.start k8s.stop jenca.start jenca.stop
+jenca.refresh:
+	make images
+	bash scripts/jenca.sh restart $(SERVICE)
+
+jenca.expose:
+	bash scripts/jenca.sh expose
+
+.PHONY: clean update images test k8s.start k8s.stop jenca.start jenca.stop jenca.expose

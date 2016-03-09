@@ -8,6 +8,9 @@ Usage:
 jenca.sh start
 jenca.sh stop
 jenca.sh replace
+jenca.sh restart
+jenca.sh expose
+jenca.sh hide
 jenca.sh help
 EOF
 	exit 1
@@ -22,10 +25,10 @@ cmd-k8s() {
 
   if [[ -f "$file" ]]; then
     if [[ -f "$dir/disable" ]]; then
-      echo "service disabled: $servicename ($resourcename)"
+      echo "k8s disabled: $servicename ($resourcename)"
       return
     fi
-    echo "service $action: $servicename ($resourcename)"
+    echo "k8s $action: $servicename ($resourcename)"
     kubectl $action -f $file
   fi
 }
@@ -48,6 +51,8 @@ cmd-k8s-loop() {
   local service="$2"
   local resource="$3"
 
+  echo "${action} ${service} ${resource}"
+
   local manifestdir="${DIR}/../stack/manifests/core"
   
   if [[ "$service" == "*" ]]; then
@@ -55,26 +60,22 @@ cmd-k8s-loop() {
   fi
 
   # you can pass a single service - k8s start jenca-router
-  if [[ -n "$service" ]]; then
+  if [[ -n "$service" && ! -f "${dir}/disable" ]]; then
 
     # you can pass a single resources - k8s start jenca-router controller
-    if [[ -z "$resource" || "$resource"=="service" ]]; then
-      if [[ ! -f "${dir}/disable" ]]; then
-        cmd-k8s $action "${manifestdir}/${service}/service.yml"
-      fi
-    fi
-
-    if [[ -z "$resource" || "$resource"=="controller" ]]; then
-      if [[ ! -f "${dir}/disable" ]]; then
-        cmd-k8s $action "${manifestdir}/${service}/controller.yml"
-      fi
+    if [[ "$resource" == "service" ]]; then
+      cmd-k8s $action "${manifestdir}/${service}/service.yml"
+    elif [[ "$resource" == "controller" ]]; then
+      cmd-k8s $action "${manifestdir}/${service}/controller.yml"
+    else
+      cmd-k8s $action "${manifestdir}/${service}/service.yml"
+      cmd-k8s $action "${manifestdir}/${service}/controller.yml"
     fi
 
   else
     for dir in $(ls -d $manifestdir/*); 
     do
       if [[ -d "${dir}" && ! -f "${dir}/disable" ]]; then
-        echo "here $dir"
         if [[ -z "$resource" || "$resource"=="service" ]]; then
           cmd-k8s $action "${dir}/service.yml"
         fi
@@ -104,11 +105,34 @@ cmd-stop() {
   cmd-k8s-loop delete $@
 }
 
+cmd-restart() {
+  local service="$1"
+  cmd-k8s-loop delete $service controller
+  cmd-k8s-loop create $service controller
+}
+
+cmd-expose() {
+  # expose the router service as a node port on the host
+  kubectl expose rc router \
+    --port=80 \
+    --target-port=80 \
+    --name=jenca-router-public \
+    --type=NodePort
+  kubectl get svc jenca-router-public -o json 
+}
+
+cmd-hide() {
+  kubectl delete svc jenca-router-public
+}
+
 main() {
 	case "$1" in
 	start)					      shift; cmd-start $@;;
 	stop)					        shift; cmd-stop $@;;
   replace)              shift; cmd-replace $@;;
+  restart)              shift; cmd-restart $@;;
+  expose)               shift; cmd-expose $@;;
+  hide)                 shift; cmd-hide $@;;
 	*)                    usage $@;;
 	esac
 }

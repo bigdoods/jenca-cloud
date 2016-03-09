@@ -89,11 +89,35 @@ To start the jenca containers on k8s:
 $ make jenca.start
 $ make jenca.stop
 ```
+
+## Make a change to a jenca service - rebuild it and redeploy it:
+
+For the router service (replace this with the service you want to re-deploy):
+
+```bash
+$ make images router
+$ bash scripts/jenca.sh restart router
+```
+
 ## Check that everythings up
 
 ```bash
 $ kubectl get pods
 $ docker ps
+```
+
+## Expose the router onto the VM to test
+
+To open up a random port on the Vagrant VM that points at the router:
+
+```bash
+$ make jenca.expose
+```
+
+To close that port:
+
+```bash
+$ make jenca.hide
 ```
 
 ## Expose a single pod to test

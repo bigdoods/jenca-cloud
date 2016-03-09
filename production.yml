@@ -1,8 +1,0 @@
-api:
-  extends:
-    file: docker-compose.yml
-    service: api
-  environment:
-    - "PROJECT_HOST=46.101.23.69"
-
-  
