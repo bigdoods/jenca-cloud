@@ -18,6 +18,7 @@ cmd-build-system-images() {
 
 cmd-build-image() {
 	local repo=$1;
+  echo "building image: $repo"
 	cd ${DIR}/../repos/${repo} && make images
 }
 
