@@ -77,3 +77,48 @@ tape('can read /v1/projects/version', function (t) {
     t.end()
   })
 })
+
+tape('can read /v1/projects/version via the k8s proxy', function (t) {
+  request({
+    url:k8surl('/api/v1/proxy/namespaces/default/services/projects/v1/projects/version'),
+    method:'GET'
+  }, function(err, res){
+    if(err){
+      t.error(err)
+      return t.end()
+    }
+
+    t.equal(res.body.match(/^\d+\.\d+\.\d+$/) ? true : false, true, 'the version is a semver')
+
+    t.end()
+  })
+})
+
+/*
+
+tape('can signup to /v1/auth/signup', function (t) {
+  request({
+    url:routerurl('/v1/auth/signup'),
+    method:'POST',
+    json:true,
+    body:{
+      email:'bob@bob.com',
+      password:'apples'
+    }
+  }, function(err, res){
+    if(err){
+      t.error(err)
+      return t.end()
+    }
+
+    console.log('-------------------------------------------');
+    console.log(res.statusCode)
+    console.dir(res.body)
+
+    //t.equal(res.body.match(/^\d+\.\d+\.\d+$/) ? true : false, true, 'the version is a semver')
+
+    t.end()
+  })
+})
+
+*/
