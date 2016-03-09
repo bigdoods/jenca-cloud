@@ -23,3 +23,18 @@ tape('can connect to the k8s api', function (t) {
  
 
 })
+
+tape('can read the exposed port for the route', function (t) {
+
+  get('/api/v1/namespaces/default/services/jenca-router-public', function(err, res){
+    if(err){
+      t.error(err)
+      return t.end()
+    }
+
+    t.equal(typeof(res.body.spec.ports[0].nodePort), 'number', 'the node port is a number')
+    
+    t.end()
+  })
+
+})

@@ -141,3 +141,14 @@ ports": [
 ```
 
 connect to `IP:<nodePort>` on your laptop, where `IP` is in the `Vagrantfile` (btw - we have mapped the current IP to dev.jenca.org)
+
+## run acceptance tests
+
+```bash
+$ make k8s.start
+$ sleep 15
+$ make jenca.start
+$ sleep 15
+$ make jenca.expose
+$ bash scripts/tests.sh acceptance
+```
