@@ -22,6 +22,10 @@ jenca.start:
 jenca.stop:
 	bash scripts/jenca.sh stop $(SERVICE)
 
+jenca.refresh:
+	make images
+	bash scripts/jenca.sh restart $(SERVICE)
+
 jenca.expose:
 	bash scripts/jenca.sh expose
 
