@@ -1,6 +1,9 @@
 clean:
 	docker rm -f `docker ps -q -f status=exited`
 
+setup:
+	bash ./scripts/setup.sh
+
 update:
 	bash ./scripts/repos.sh update
 

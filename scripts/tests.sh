@@ -6,9 +6,16 @@ usage() {
 cat <<EOF
 Usage:
 tests.sh run
+tests.sh acceptance
 tests.sh help
 EOF
 	exit 1
+}
+
+cmd-run-acceptance() {
+  cd ${DIR}/../test/acceptance && \
+    npm install && \
+    npm test
 }
 
 cmd-run-test() {
@@ -28,7 +35,8 @@ cmd-run-tests() {
 
 main() {
 	case "$1" in
-	run)					      	shift; cmd-run-tests; $@;;
+	run)					      	shift; cmd-run-tests $@;;
+  acceptance)           shift; cmd-run-acceptance $@;;
 	*)                    usage $@;;
 	esac
 }
