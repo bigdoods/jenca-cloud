@@ -18,17 +18,23 @@ cmd-build-image() {
 
 cmd-build-images() {
 	local repodir="${DIR}/../repos/*"
-	for dir in $(ls -d $repodir); 
-  do
-  	if [[ -d $dir ]]; then
-    	cmd-build-image `basename $dir`
-    fi
-  done
+  local service="$1"
+
+  if [[ -n "$service" ]]; then
+    cmd-build-image "jenca-${service}"
+  else
+    for dir in $(ls -d $repodir); 
+    do
+      if [[ -d $dir ]]; then
+        cmd-build-image `basename $dir`
+      fi
+    done
+  fi
 }
 
 main() {
 	case "$1" in
-	build)					      shift; cmd-build-images; $@;;
+	build)					      shift; cmd-build-images $@;;
 	*)                    usage $@;;
 	esac
 }
