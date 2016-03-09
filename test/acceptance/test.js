@@ -1,27 +1,35 @@
 var tape = require('tape')
 var async = require('async')
-var hyperrequest = require('hyperrequest')
+var request = require('request')
 
 var routerPort = null
 
 function get(host, url, done){
-  hyperrequest({
-    url:host + url,
-    method:'GET',
-  }, done)
+  request(host + url, function (error, response, body) {
+    if (!error) {
+      done(null, body, response)
+    }
+    else{
+      done(error)
+    }
+  })
 }
 
-function k8sget(url, done){
-  return get('http://127.0.0.1:8080', url, done)
+function k8surl(path){
+  return 'http://127.0.0.1:8080' + path
 }
 
-function routerget(url, done){
-  return get('http://127.0.0.1:' + routerPort, url, done)
+function routerurl(path){
+  return 'http://127.0.0.1:' + routerPort + path
 }
 
 tape('can connect to the k8s api', function (t) {
   
-  k8sget('/version', function(err, res){
+  request({
+    url:k8surl('/version'),
+    method: 'GET',
+    json: true
+  }, function(err, res, body){
     if(err){
       t.error(err)
       return t.end()
@@ -35,7 +43,11 @@ tape('can connect to the k8s api', function (t) {
 
 tape('can read the exposed port for the route', function (t) {
 
-  k8sget('/api/v1/namespaces/default/services/jenca-router-public', function(err, res){
+  request({
+    url:k8surl('/api/v1/namespaces/default/services/jenca-router-public'),
+    method:'GET',
+    json:true
+  }, function(err, res){
     if(err){
       t.error(err)
       return t.end()
@@ -51,7 +63,10 @@ tape('can read the exposed port for the route', function (t) {
 })
 
 tape('can read /v1/projects/version', function (t) {
-  routerget('/v1/projects/version', function(err, res){
+  request({
+    url:routerurl('/v1/projects/version'),
+    method:'GET'
+  }, function(err, res){
     if(err){
       t.error(err)
       return t.end()

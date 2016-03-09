@@ -19,9 +19,11 @@
   "homepage": "https://github.com/jenca-cloud/jenca-cloud",
   "devDependencies": {
     "tape": "^4.3.0",
-    "async": "^1.5.0"
+    "async": "^1.5.0",
+    "request": "^2.69.0"
   },
   "dependencies": {
-    "hyperrequest": "0.0.4"
+    
+    
   }
 }
