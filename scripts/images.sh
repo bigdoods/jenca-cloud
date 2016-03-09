@@ -6,9 +6,14 @@ usage() {
 cat <<EOF
 Usage:
 images.sh build
+images.sh system
 images.sh help
 EOF
 	exit 1
+}
+
+cmd-build-system-images() {
+  docker build -t jenca/testtools ${DIR}/../test/acceptance
 }
 
 cmd-build-image() {
@@ -30,11 +35,14 @@ cmd-build-images() {
       fi
     done
   fi
+
+  cmd-build-system-images
 }
 
 main() {
 	case "$1" in
 	build)					      shift; cmd-build-images $@;;
+  system)               shift; cmd-build-system-images $@;;
 	*)                    usage $@;;
 	esac
 }

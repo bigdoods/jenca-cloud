@@ -1,0 +1,27 @@
+{
+  "name": "jenca-acceptance-test",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Communicate with the Kubernetes API to run the stack",
+  "main": "test.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jenca-cloud/jenca-cloud.git"
+  },
+  "author": "jenca",
+  "license": "APACHE2",
+  "bugs": {
+    "url": "https://github.com/jenca-cloud/jenca-cloud/issues"
+  },
+  "homepage": "https://github.com/jenca-cloud/jenca-cloud",
+  "devDependencies": {
+    "tape": "^4.3.0",
+    "async": "^1.5.0"
+  },
+  "dependencies": {
+    "hyperrequest": "0.0.4"
+  }
+}
