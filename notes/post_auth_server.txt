@@ -1,0 +1,39 @@
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"email": "user@example.com","password":"secret"}' \
+  http://${AUTHURL}/signup
+
+curl -X GET \
+  -H "Content-Type: application/json" \
+  http://${AUTHURL}/status
+
+
+
+
+export AUTHURL=10.0.0.231:5000
+
+
+
+curl -X GET \
+  -H "Content-Type: application/json" \
+  http://127.0.0.1:8080/api/v1/proxy/namespaces/default/services/authentication/status
+
+
+curl -X GET \
+  -H "Content-Type: application/json" \
+  http://10.0.0.231:5000/status
+
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"email": "user2@example.com","password":"secret"}' \
+  http://10.0.0.231:5000/signup
+
+
+
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"email": "user@example.com","password":"secret"}' \
+  http://127.0.0.1:8080/api/v1/proxy/namespaces/default/services/authentication/signup
+
+
+  -H "Content-Type: application/json" -d '{"email": "user@example.com","password":"secret"}' \

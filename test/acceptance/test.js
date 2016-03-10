@@ -57,6 +57,8 @@ tape('can read the exposed port for the route', function (t) {
     
     routerPort = res.body.spec.ports[0].nodePort
 
+    console.log('router port: ' + routerPort)
+
     t.end()
   })
 
@@ -71,6 +73,9 @@ tape('can read /v1/projects/version', function (t) {
       t.error(err)
       return t.end()
     }
+
+    console.log('-------------------------------------------');
+    console.log(res.body)
 
     t.equal(res.body.match(/^\d+\.\d+\.\d+$/) ? true : false, true, 'the version is a semver')
 
@@ -94,7 +99,6 @@ tape('can read /v1/projects/version via the k8s proxy', function (t) {
   })
 })
 
-/*
 
 tape('can signup to /v1/auth/signup', function (t) {
   request({
@@ -120,5 +124,3 @@ tape('can signup to /v1/auth/signup', function (t) {
     t.end()
   })
 })
-
-*/
