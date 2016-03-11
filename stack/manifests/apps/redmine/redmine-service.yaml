@@ -7,8 +7,8 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 2368
-      targetPort: 2368
+    - port: 3000
+      targetPort: 3000
       protocol: TCP
   selector:
     app: redmine

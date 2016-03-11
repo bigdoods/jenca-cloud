@@ -17,6 +17,36 @@ spec:
       containers:
       - name: wordpress
         image: wordpress
+     #   links:
+     #   - db: mysql
+     #   env: 
+     #   - name: WORDPRESS_DB_HOST
+     #   - value: 
+     #   - name: WORDPRESS_DB_USER
+     #   - value:
+     #   - name: WORDPRESS_DB_PASSWORD
+     #   - value:
+     #   - name: WORDPRESS_DB_NAME
+     #   - value:
+     #   - name: WORDPRESS_TABLE_PREFIX
+     #   - value:
+     #   - name: WORDPRESS_AUTH_KEY
+     #   - value:
+     #   - name: WORDPRESS_SECURE_AUTH_KEY
+     #   - value:
+     #   - name: WORDPRESS_LOGGED_IN_KEY
+     #   - value:
+     #   - name: WORDPRESS_NONCE_KEY
+     #   - value:
+     #   - name: WORDPRESS_AUTH_SALT
+     #   - value: 
+     #   - name: WORDPRESS_SECURE_AUTH_SALT
+     #   - value:
+     #   - name: WORDPRESS_LOGGED_IN_SALT
+     #   - value:
+     #   - name: WORDPRESS_NONCE_SALT
+     #   - value:
+
         ports:
-        - containerPort: 80
+        - containerPort: 8080
         
