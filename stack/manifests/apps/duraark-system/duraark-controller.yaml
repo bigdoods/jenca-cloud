@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: duraark
+  name: duraark-controller
+spec:
+  replicas: 1
+  selector:
+    app: duraark
+  template:
+    metadata:
+      name: duraark
+      labels:
+        app: duraark
+    spec:
+      containers:
+      - name: duraark
+        image: duraark
+        ports:
+        - containerPort: 80
+        
