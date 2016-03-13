@@ -19,6 +19,10 @@ spec:
         env:
         - name: LEVEL_HOST
           value: "env:PROJECTS_STORAGE_SERVICE_HOST"
+        - name: AUTH_HOST
+          value: "env:AUTHENTICATION_SERVICE_HOST"
+        - name: RUNTIME_HOST
+          value: "env:RUNTIME_SERVICE_HOST"
         ports:
         - containerPort: 80
           name: http-server
