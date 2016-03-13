@@ -3,6 +3,7 @@ var async = require('async')
 var request = require('request')
 
 var routerPort = null
+var emailaddress = 'bob' + (new Date().getTime()) + '@bob.com'
 
 function get(host, url, done){
   request(host + url, function (error, response, body) {
@@ -102,7 +103,6 @@ tape('can read /v1/projects/version via the k8s proxy', function (t) {
 
 tape('can signup to /v1/auth/signup', function (t) {
 
-  var emailaddress = 'bob' + (new Date().getTime()) + '@bob.com'
   request({
     url:routerurl('/v1/auth/signup'),
     method:'POST',
@@ -127,6 +127,59 @@ tape('can signup to /v1/auth/signup', function (t) {
 
     //t.equal(res.body.match(/^\d+\.\d+\.\d+$/) ? true : false, true, 'the version is a semver')
 
+    t.end()
+  })
+})
+
+
+tape('can login to /v1/auth/login', function (t) {
+
+  request({
+    url:routerurl('/v1/auth/login'),
+    method:'POST',
+    json:true,
+    body:{
+      email:emailaddress,
+      password:'apples'
+    }
+  }, function(err, res){
+    if(err){
+      t.error(err)
+      return t.end()
+    }
+
+    console.log('-------------------------------------------');
+    console.log(res.statusCode)
+    console.dir(res.body)
+
+
+    t.equal(res.statusCode, 200, 'the status code is 200')
+    t.equal(res.body.email, emailaddress, 'the email is the same')
+    t.equal(res.body.password, 'apples', 'the password is the same')
+
+
+    //t.equal(res.body.match(/^\d+\.\d+\.\d+$/) ? true : false, true, 'the version is a semver')
+
+    t.end()
+  })
+})
+
+
+tape('can view the libary at /v1/library', function (t) {
+
+  request({
+    url:routerurl('/v1/library'),
+    method:'GET'
+  }, function(err, res){
+    if(err){
+      t.error(err)
+      return t.end()
+    }
+
+    var data = JSON.parse(res.body)
+    t.equal(res.statusCode, 200, 'the status code is 200')
+    t.equal(data.bimserver.controller.kind, 'ReplicationController', 'the library has loaded the aps')
+    
     t.end()
   })
 })
