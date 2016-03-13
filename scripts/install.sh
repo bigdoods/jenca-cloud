@@ -11,3 +11,6 @@ curl https://get.docker.com/ | sh
 usermod -aG docker vagrant
 
 bash /vagrant/scripts/k8s.sh download
+
+curl -sL https://deb.nodesource.com/setup_5.x | bash -
+apt-get install -y nodejs
