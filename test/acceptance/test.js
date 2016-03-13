@@ -2,6 +2,8 @@ var tape = require('tape')
 var async = require('async')
 var request = require('request')
 
+request = request.defaults({jar: true})
+
 var routerPort = null
 var emailaddress = 'bob' + (new Date().getTime()) + '@bob.com'
 
@@ -157,13 +159,38 @@ tape('can login to /v1/auth/login', function (t) {
     t.equal(res.body.email, emailaddress, 'the email is the same')
     t.equal(res.body.password, 'apples', 'the password is the same')
 
-
     //t.equal(res.body.match(/^\d+\.\d+\.\d+$/) ? true : false, true, 'the version is a semver')
 
     t.end()
   })
 })
 
+tape('the cookie works', function (t) {
+
+  request({
+    url:routerurl('/v1/auth/status'),
+    method:'GET',
+    headers:{
+      'Content-type':'application/json'
+    }
+  }, function(err, res){
+    if(err){
+      t.error(err)
+      return t.end()
+    }
+
+
+    t.equal(res.statusCode, 200, 'the status code is 200')
+    t.equal(res.body.email, emailaddress, 'the email is the same')
+    t.equal(res.body.is_authenticated, true, 'the cookie is authenticated')
+
+    console.log('-------------------------------------------');
+    console.log(res.statusCode)
+    console.dir(res.body)
+
+    t.end()
+  })
+})
 
 tape('can view the libary at /v1/library', function (t) {
 
