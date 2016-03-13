@@ -101,12 +101,14 @@ tape('can read /v1/projects/version via the k8s proxy', function (t) {
 
 
 tape('can signup to /v1/auth/signup', function (t) {
+
+  var emailaddress = 'bob' + (new Date().getTime()) + '@bob.com'
   request({
     url:routerurl('/v1/auth/signup'),
     method:'POST',
     json:true,
     body:{
-      email:'bob@bob.com',
+      email:emailaddress,
       password:'apples'
     }
   }, function(err, res){
@@ -118,6 +120,10 @@ tape('can signup to /v1/auth/signup', function (t) {
     console.log('-------------------------------------------');
     console.log(res.statusCode)
     console.dir(res.body)
+
+    t.equal(res.statusCode, 201, 'the status code is 201')
+    t.equal(res.body.email, emailaddress, 'the email is the same')
+    t.equal(res.body.password, 'apples', 'the password is the same')
 
     //t.equal(res.body.match(/^\d+\.\d+\.\d+$/) ? true : false, true, 'the version is a semver')
 
