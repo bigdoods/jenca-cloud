@@ -6,6 +6,7 @@ request = request.defaults({jar: true})
 
 var routerPort = null
 var emailaddress = 'bob' + (new Date().getTime()) + '@bob.com'
+var bimserver = null
 
 function get(host, url, done){
   request(host + url, function (error, response, body) {
@@ -172,7 +173,8 @@ tape('the cookie works', function (t) {
     method:'GET',
     headers:{
       'Content-type':'application/json'
-    }
+    },
+    json:true
   }, function(err, res){
     if(err){
       t.error(err)
@@ -207,6 +209,33 @@ tape('can view the libary at /v1/library', function (t) {
     t.equal(res.statusCode, 200, 'the status code is 200')
     t.equal(data.bimserver.controller.kind, 'ReplicationController', 'the library has loaded the aps')
     
+    bimserver = data.bimserver
+
+    t.end()
+  })
+})
+
+
+tape('can make a project', function (t) {
+
+  request({
+    url:routerurl('/v1/projects'),
+    method:'POST',
+    json:true,
+    body:{
+      name:'my test project',
+      app:bimserver
+    }
+  }, function(err, res){
+    if(err){
+      t.error(err)
+      return t.end()
+    }
+
+    console.log('-------------------------------------------');
+    console.log(res.statusCode)
+    console.dir(res.body)
+
     t.end()
   })
 })
