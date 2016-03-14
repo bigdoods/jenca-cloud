@@ -1,5 +1,5 @@
 clean:
-	docker rm -f `docker ps -q -f status=exited`
+	bash ./scripts/clean.sh
 
 setup:
 	bash ./scripts/setup.sh
