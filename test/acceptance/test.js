@@ -264,3 +264,28 @@ tape('can read projects', function (t) {
     t.end()
   })
 })
+
+
+tape('can start our project', function (t) {
+
+  request({
+    url:routerurl('/v1/projects'),
+    method:'GET'
+  }, function(err, res){
+    if(err){
+      t.error(err)
+      return t.end()
+    }
+
+    var body = JSON.parse(res.body)
+
+    t.equal(body.length, 1, 'there is one project')
+    t.equal(body[0].name, 'my test project', 'it is our project')
+
+    console.log('-------------------------------------------');
+    console.log(res.statusCode)
+    console.dir(res.body)
+
+    t.end()
+  })
+})
