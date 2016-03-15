@@ -265,11 +265,31 @@ tape('can read projects', function (t) {
   })
 })
 
-/*
+tape('can read the project', function (t) {
+
+  request({
+    url:routerurl('/v1/projects/' + projectId),
+    method:'GET'
+  }, function(err, res){
+    if(err){
+      t.error(err)
+      return t.end()
+    }
+
+    var body = JSON.parse(res.body)
+    
+    t.equal(body.name, 'my test project', 'it is our project')
+    t.equal(body.id, projectId, 'the id is correct')
+
+    t.end()
+  })
+})
+
+
 tape('can read the status of the project', function (t) {
 
   request({
-    url:routerurl('/v1/projects'),
+    url:routerurl('/v1/projects/' + projectId + '/status'),
     method:'GET'
   }, function(err, res){
     if(err){
@@ -279,14 +299,11 @@ tape('can read the status of the project', function (t) {
 
     var body = JSON.parse(res.body)
 
-    t.equal(body.length, 1, 'there is one project')
-    t.equal(body[0].name, 'my test project', 'it is our project')
-
-    console.log('-------------------------------------------');
-    console.log(res.statusCode)
-    console.dir(res.body)
+    t.equal(body.running, false, 'the running value is false')
+    t.deepEqual(body.runState, {}, 'the runState is an empty object')
 
     t.end()
+    
   })
-})*/
+})
 
