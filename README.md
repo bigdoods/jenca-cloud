@@ -152,3 +152,38 @@ $ sleep 15
 $ make jenca.expose
 $ bash scripts/tests.sh acceptance
 ```
+
+## production deployment
+
+We deploy on the [Google container engine](https://cloud.google.com/container-engine/docs/before-you-begin)
+
+You need access to the `jenca-cloud` project.
+
+Follow the instructions [here](https://cloud.google.com/container-engine/docs/before-you-begin#install_the_gcloud_command-line_interface)
+
+The values required for the settings are listed here (the output of `gcloud config list`)
+
+```
+[compute]
+region = europe-west1
+zone = europe-west1-b
+[container]
+cluster = test-cluster
+[core]
+account = <XXX your google account email here>
+disable_usage_reporting = True
+project = jenca-cloud
+```
+
+To set the container cluster:
+
+```
+$ gcloud config set container/cluster test-cluster
+```
+
+To configure kubectl to see that cluster:
+
+```
+$ gcloud container clusters get-credentials test-cluster
+```
+
