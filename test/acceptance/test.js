@@ -7,6 +7,7 @@ request = request.defaults({jar: true})
 var routerPort = null
 var emailaddress = 'bob' + (new Date().getTime()) + '@bob.com'
 var bimserver = null
+var projectId = null
 
 function get(host, url, done){
   request(host + url, function (error, response, body) {
@@ -256,17 +257,16 @@ tape('can read projects', function (t) {
 
     t.equal(body.length, 1, 'there is one project')
     t.equal(body[0].name, 'my test project', 'it is our project')
+    t.equal(body[0].id.match(/^\w{8}-\w{4}-\w{4}-\w{4}-\w{12}$/) ? true : false, true, 'the project id is a uuid')
 
-    console.log('-------------------------------------------');
-    console.log(res.statusCode)
-    console.dir(res.body)
+    projectId = body[0].id
 
     t.end()
   })
 })
 
-
-tape('can start our project', function (t) {
+/*
+tape('can read the status of the project', function (t) {
 
   request({
     url:routerurl('/v1/projects'),
@@ -288,4 +288,5 @@ tape('can start our project', function (t) {
 
     t.end()
   })
-})
+})*/
+
