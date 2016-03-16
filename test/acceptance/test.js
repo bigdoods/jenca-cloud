@@ -307,3 +307,32 @@ tape('can read the status of the project', function (t) {
   })
 })
 
+
+tape('can update the status of the project', function (t) {
+
+  console.log('-------------------------------------------');
+  console.log('/v1/projects/' + projectId + '/status')
+  request({
+    url:routerurl('/v1/projects/' + projectId + '/status'),
+    method:'PUT',
+    json:true,
+    body:{
+      running:true
+    }
+  }, function(err, res){
+    if(err){
+      t.error(err)
+      return t.end()
+    }
+
+    console.log('-------------------------------------------');
+    console.log('log output')
+    console.log(res.body)
+    //var body = JSON.parse(res.body)
+
+    //console.log(JSON.stringify(body, null, 4))
+
+    t.end()
+    
+  })
+})
