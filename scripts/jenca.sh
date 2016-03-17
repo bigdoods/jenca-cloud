@@ -10,6 +10,7 @@ jenca.sh stop
 jenca.sh replace
 jenca.sh restart
 jenca.sh expose
+jenca.sh info
 jenca.sh hide
 jenca.sh help
 EOF
@@ -111,6 +112,10 @@ cmd-restart() {
   cmd-k8s-loop create $service controller
 }
 
+cmd-info() {
+  kubectl get svc jenca-router-public -o json 
+}
+
 cmd-expose() {
   # expose the router service as a node port on the host
   kubectl expose rc router \
@@ -118,7 +123,7 @@ cmd-expose() {
     --target-port=80 \
     --name=jenca-router-public \
     --type=NodePort
-  kubectl get svc jenca-router-public -o json 
+  cmd-info
 }
 
 cmd-hide() {
@@ -132,6 +137,7 @@ main() {
   replace)              shift; cmd-replace $@;;
   restart)              shift; cmd-restart $@;;
   expose)               shift; cmd-expose $@;;
+  info)                 shift; cmd-info $@;;
   hide)                 shift; cmd-hide $@;;
 	*)                    usage $@;;
 	esac

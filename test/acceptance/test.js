@@ -336,3 +336,47 @@ tape('can update the status of the project', function (t) {
     
   })
 })
+
+
+tape('can read the status of the project', function (t) {
+
+  request({
+    url:routerurl('/v1/projects/' + projectId + '/status'),
+    method:'GET'
+  }, function(err, res){
+    if(err){
+      t.error(err)
+      return t.end()
+    }
+
+    var body = JSON.parse(res.body)
+
+/*
+    t.equal(body.running, false, 'the running value is false')
+    t.deepEqual(body.runState, {}, 'the runState is an empty object')
+*/
+
+    console.log(JSON.stringify(body, null, 4))
+    t.end()
+    
+  })
+})
+
+
+tape('can read the project', function (t) {
+
+  request({
+    url:routerurl('/v1/projects/' + projectId),
+    method:'GET'
+  }, function(err, res){
+    if(err){
+      t.error(err)
+      return t.end()
+    }
+
+    var body = JSON.parse(res.body)
+    
+    console.log(JSON.stringify(body, null, 4))
+    t.end()
+  })
+})

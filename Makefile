@@ -21,6 +21,7 @@ k8s.stop:
 
 jenca.start:
 	bash scripts/jenca.sh start $(SERVICE)
+	bash scripts/jenca.sh expose
 
 jenca.stop:
 	bash scripts/jenca.sh stop $(SERVICE)
@@ -31,5 +32,8 @@ jenca.refresh:
 
 jenca.expose:
 	bash scripts/jenca.sh expose
+
+jenca.info:
+	bash scripts/jenca.sh info
 
 .PHONY: clean update images test k8s.start k8s.stop jenca.start jenca.stop jenca.expose
