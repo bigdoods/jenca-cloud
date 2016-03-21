@@ -29,7 +29,7 @@ $ vagrant ssh
 $ cd /vagrant
 ```
 
-After doing a vagrant up - check it's installed by doing 
+After doing a vagrant up - check it's installed by doing
 ```bash
 $ docker info
 ```
@@ -96,7 +96,7 @@ For the router service (replace this with the service you want to re-deploy):
 
 ```bash
 $ make images router
-$ bash scripts/jenca.sh restart router
+$ make jenca.restart router
 ```
 
 ## Check that everythings up

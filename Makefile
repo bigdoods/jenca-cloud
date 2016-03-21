@@ -23,6 +23,9 @@ jenca.start:
 	bash scripts/jenca.sh start $(SERVICE)
 	bash scripts/jenca.sh expose
 
+jenca.restart:
+	bash scripts/jenca.sh restart $(SERVICE)
+
 jenca.stop:
 	bash scripts/jenca.sh stop $(SERVICE)
 
