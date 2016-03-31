@@ -95,8 +95,7 @@ $ make jenca.stop
 For the router service (replace this with the service you want to re-deploy):
 
 ```bash
-$ make images router
-$ bash scripts/jenca.sh restart router
+$ SERVICE=router make jenca.refresh
 ```
 
 ## Check that everythings up
