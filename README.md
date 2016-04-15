@@ -13,7 +13,8 @@ First you need to install:
 
  * [VirtualBox version <=4.3](https://www.virtualbox.org/wiki/Download_Old_Builds_4_3)
  * [Vagrant](https://www.vagrantup.com/docs/installation/)
-
+ * [DOCKER](https://docs.docker.com/linux/step_one/)
+ 
 Pull the repo
 
 ```bash
